@@ -522,6 +522,23 @@ a {
   color: var(--text-2);
 }
 
+/* No celular, a caixa do anúncio "escapa" do recuo lateral da página e
+   encosta nas bordas da tela — só o rótulo "Publicidade" continua
+   alinhado com o resto do conteúdo. Em telas maiores (tablet/desktop)
+   mantém o mesmo recuo do restante da Home. */
+@media (max-width: 639px) {
+  .ad-slot__box {
+    margin-left: calc(-1 * var(--page-padding-x));
+    margin-right: calc(-1 * var(--page-padding-x));
+  }
+
+  .ad-slot__placeholder {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
 .home__footer {
   position: relative;
   margin-top: var(--space-8);
