@@ -1,13 +1,13 @@
 {
-  "name": "Crítica Online — Portal BI",
-  "short_name": "Crítica Online",
-  "description": "Portal mobile de indicadores e dashboards Crítica Online.",
+  "name": "LUVI BI — Portal de Indicadores",
+  "short_name": "LUVI BI",
+  "description": "Portal mobile de indicadores e dashboards LUVI BI.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0B1120",
-  "theme_color": "#0B1120",
+  "background_color": "#0A467C",
+  "theme_color": "#0A467C",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },

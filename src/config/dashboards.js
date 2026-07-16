@@ -17,14 +17,14 @@ export const dashboards = [
   {
     id: 'critica-online',
     nome: 'Crítica Online 2.0',
-    descricao: 'Informações úteis para o RN (Task, Pedido, Etc)',
+    descricao: 'Indicadores e análises em tempo real',
     icone: 'BarChart3',
     url: 'https://app.powerbi.com/view?r=eyJrIjoiMjkwYjM5NjEtZWExNC00ZDkxLTlmMWItZjg1NmE2MzgyYWRkIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
   },
   {
     id: 'remuneracao',
     nome: 'Remuneração',
-    descricao: 'Indicadores de remuneração',
+    descricao: 'Indicadores de remuneração e folha',
     icone: 'Wallet',
     url: 'https://app.powerbi.com/view?r=eyJrIjoiNTJjNTdhMTItMTAxZi00NDYwLWFjZDQtNDhmNGQyYjk2YTY4IiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
   },

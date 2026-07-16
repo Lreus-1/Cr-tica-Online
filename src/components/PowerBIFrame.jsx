@@ -15,7 +15,7 @@ const LOAD_TIMEOUT_MS = 20000;
  * portal. Por isso, o "erro" tratado aqui cobre os casos que o portal
  * consegue detectar de fato: timeout de carregamento e falha de rede.
  */
-export default function PowerBIFrame({ dashboard, reloadKey }) {
+export default function PowerBIFrame({ dashboard, reloadKey, onStatusChange }) {
   const [status, setStatus] = useState('loading'); // loading | ready | error
   const [retryNonce, setRetryNonce] = useState(0);
   const timeoutRef = useRef(null);
@@ -23,16 +23,23 @@ export default function PowerBIFrame({ dashboard, reloadKey }) {
 
   useEffect(() => {
     setStatus('loading');
+    onStatusChange?.('loading');
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      setStatus((current) => (current === 'loading' ? 'error' : current));
+      setStatus((current) => {
+        if (current !== 'loading') return current;
+        onStatusChange?.('error');
+        return 'error';
+      });
     }, LOAD_TIMEOUT_MS);
     return () => clearTimeout(timeoutRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [frameKey, dashboard.url]);
 
   const handleLoad = () => {
     clearTimeout(timeoutRef.current);
     setStatus('ready');
+    onStatusChange?.('ready');
   };
 
   const handleRetry = () => {

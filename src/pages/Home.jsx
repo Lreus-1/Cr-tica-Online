@@ -1,53 +1,52 @@
-import { BarChart3 } from 'lucide-react';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
+import LuviMark from '../components/LuviMark.jsx';
 
 export default function Home() {
   return (
     <div className="home">
-      <span className="home__glow home__glow--a" aria-hidden="true" />
-      <span className="home__glow home__glow--b" aria-hidden="true" />
+      <div className="home__aurora" aria-hidden="true">
+        <span />
+        <span />
+      </div>
 
       <header className="home__header">
         <div className="home__brand">
-          <span className="home__logo">
-            <BarChart3 size={22} strokeWidth={2.2} />
+          <span className="home__mark">
+            <LuviMark size={22} />
           </span>
-          <div>
-            <p className="home__eyebrow">Portal BI</p>
-            <h1 className="home__name">Crítica Online</h1>
+          <div className="home__brand-text">
+            <p className="home__name">LUVI BI</p>
+            <p className="home__eyebrow">Portal de indicadores</p>
           </div>
         </div>
-        <p className="home__greeting">
-          Seus indicadores, sempre à mão. Escolha um dashboard abaixo.
-        </p>
 
-        <svg
-          className="home__pulse"
-          viewBox="0 0 320 46"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            className="home__pulse-track"
-            d="M0,30 C30,30 34,10 54,10 C74,10 78,36 100,36 C122,36 126,6 150,6 C174,6 178,32 202,32 C226,32 230,16 254,16 C278,16 282,26 320,26"
-          />
-          <path
-            className="home__pulse-line"
-            d="M0,30 C30,30 34,10 54,10 C74,10 78,36 100,36 C122,36 126,6 150,6 C174,6 178,32 202,32 C226,32 230,16 254,16 C278,16 282,26 320,26"
-          />
-        </svg>
+        <h1 className="home__title">Painéis</h1>
+        <p className="home__subtitle">
+          Selecione um painel para visualizar os indicadores atualizados.
+        </p>
       </header>
 
-      <main className="home__list" role="list">
+      <div className="home__section-label">
+        Disponíveis
+        <svg className="home__trend" viewBox="0 0 46 16" aria-hidden="true">
+          <path className="home__trend-line" d="M2,13 L15,9 L28,9.5 L42,3" />
+          <circle className="home__trend-dot" cx="2" cy="13" r="2.2" />
+          <circle className="home__trend-dot" cx="15" cy="9" r="2.2" />
+          <circle className="home__trend-dot" cx="28" cy="9.5" r="2.2" />
+          <circle className="home__trend-dot" cx="42" cy="3" r="2.2" />
+        </svg>
+      </div>
+
+      <nav className="dash-list" role="list" aria-label="Lista de dashboards">
         {dashboards.map((dashboard, index) => (
           <DashboardCard key={dashboard.id} dashboard={dashboard} index={index} />
         ))}
-      </main>
+      </nav>
 
       <footer className="home__footer">
-        <span className="home__footer-dot" />
-        Dados via Power BI
+        <span className="home__footer-tag">POWER BI</span>
+        Conteúdo renderizado a partir de relatórios publicados na web.
       </footer>
     </div>
   );

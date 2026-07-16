@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, RotateCw, Maximize, Minimize } from 'lucide-react';
+import { ArrowLeft, RotateCw, Maximize2, Minimize2 } from 'lucide-react';
 import { getDashboardById } from '../config/dashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
@@ -21,6 +21,7 @@ export default function DashboardView() {
   const containerRef = useRef(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [iosFullscreen, setIosFullscreen] = useState(false);
+  const [status, setStatus] = useState('loading');
 
   const { isFullscreen, isSupported, toggle } = useFullscreen(containerRef);
   const iosFallback = isIOS() && !isSupported;
@@ -36,6 +37,7 @@ export default function DashboardView() {
   };
 
   const active = iosFallback ? iosFullscreen : isFullscreen;
+  const isLoading = status === 'loading';
 
   return (
     <div
@@ -44,26 +46,36 @@ export default function DashboardView() {
     >
       {!active && (
         <header className="dashboard-view__header">
-          <Link to="/" className="dv-btn dv-btn--icon" aria-label="Voltar">
-            <ArrowLeft size={20} strokeWidth={2.2} />
+          <Link to="/" className="dv-btn" aria-label="Voltar">
+            <ArrowLeft size={17} strokeWidth={2} />
           </Link>
-          <h1 className="dashboard-view__title">{dashboard.nome}</h1>
+
+          <div className="dashboard-view__title-group">
+            <h1 className="dashboard-view__title">{dashboard.nome}</h1>
+            <span className="dashboard-view__badge">POWER BI</span>
+          </div>
+
           <div className="dashboard-view__actions">
             <button
-              className="dv-btn dv-btn--icon"
+              className="dv-btn"
               onClick={() => setReloadKey((k) => k + 1)}
               aria-label="Atualizar relatório"
+              disabled={isLoading}
               type="button"
             >
-              <RotateCw size={19} strokeWidth={2.2} />
+              <RotateCw
+                size={16}
+                strokeWidth={2}
+                className={`dv-btn__icon ${isLoading ? 'is-spinning' : ''}`}
+              />
             </button>
             <button
-              className="dv-btn dv-btn--icon"
+              className="dv-btn"
               onClick={handleFullscreenClick}
               aria-label="Tela cheia"
               type="button"
             >
-              <Maximize size={19} strokeWidth={2.2} />
+              <Maximize2 size={16} strokeWidth={2} />
             </button>
           </div>
         </header>
@@ -76,11 +88,11 @@ export default function DashboardView() {
           aria-label="Sair da tela cheia"
           type="button"
         >
-          <Minimize size={18} strokeWidth={2.2} />
+          <Minimize2 size={15} strokeWidth={2} />
         </button>
       )}
 
-      <PowerBIFrame dashboard={dashboard} reloadKey={reloadKey} />
+      <PowerBIFrame dashboard={dashboard} reloadKey={reloadKey} onStatusChange={setStatus} />
     </div>
   );
 }
