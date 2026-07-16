@@ -1,6 +1,7 @@
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
+import AdSlot from '../components/AdSlot.jsx';
 
 export default function Home() {
   return (
@@ -43,6 +44,8 @@ export default function Home() {
           <DashboardCard key={dashboard.id} dashboard={dashboard} index={index} />
         ))}
       </nav>
+
+      <AdSlot />
 
       <footer className="home__footer">
         <span className="home__footer-tag">POWER BI</span>

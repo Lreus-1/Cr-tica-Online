@@ -486,6 +486,42 @@ a {
   color: var(--brand-gold);
 }
 
+/* ---- Espaço de anúncio (Google AdSense) ---------------------------------- */
+.ad-slot {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ad-slot__label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.ad-slot__placeholder {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--text-3);
+  font-size: 12.5px;
+  background: var(--surface);
+}
+
+.ad-slot__placeholder code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-2);
+}
+
 .home__footer {
   position: relative;
   margin-top: var(--space-8);
