@@ -2,10 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import Loader from './Loader.jsx';
 import ErrorState from './ErrorState.jsx';
 
-const LOAD_TIMEOUT_MS = 20000;
+// Aos 16s ainda consideramos normal (relatórios do Power BI variam
+// bastante). Entre 16s e 60s, avisamos que está demorando mais que o
+// usual, mas continuamos esperando — só declaramos erro de fato aos 60s,
+// evitando o "falso alarme" que acontecia com o limite de 20s.
+const SLOW_THRESHOLD_MS = 16000;
+const HARD_TIMEOUT_MS = 60000;
 
 /**
- * Encapsula o iframe do Power BI com loading, timeout e estado de erro.
+ * Encapsula o iframe do Power BI com loading, aviso de demora e erro real.
  *
  * Importante (limitação técnica): por causa da política de cross-origin,
  * o evento `onLoad` do iframe dispara assim que o documento do Power BI
@@ -16,28 +21,44 @@ const LOAD_TIMEOUT_MS = 20000;
  * consegue detectar de fato: timeout de carregamento e falha de rede.
  */
 export default function PowerBIFrame({ dashboard, reloadKey, onStatusChange }) {
-  const [status, setStatus] = useState('loading'); // loading | ready | error
+  const [status, setStatus] = useState('loading'); // loading | slow | ready | error
   const [retryNonce, setRetryNonce] = useState(0);
-  const timeoutRef = useRef(null);
+  const slowTimerRef = useRef(null);
+  const hardTimerRef = useRef(null);
   const frameKey = `${reloadKey}-${retryNonce}`;
 
   useEffect(() => {
     setStatus('loading');
     onStatusChange?.('loading');
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
+    clearTimeout(slowTimerRef.current);
+    clearTimeout(hardTimerRef.current);
+
+    slowTimerRef.current = setTimeout(() => {
       setStatus((current) => {
         if (current !== 'loading') return current;
+        onStatusChange?.('slow');
+        return 'slow';
+      });
+    }, SLOW_THRESHOLD_MS);
+
+    hardTimerRef.current = setTimeout(() => {
+      setStatus((current) => {
+        if (current !== 'loading' && current !== 'slow') return current;
         onStatusChange?.('error');
         return 'error';
       });
-    }, LOAD_TIMEOUT_MS);
-    return () => clearTimeout(timeoutRef.current);
+    }, HARD_TIMEOUT_MS);
+
+    return () => {
+      clearTimeout(slowTimerRef.current);
+      clearTimeout(hardTimerRef.current);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [frameKey, dashboard.url]);
 
   const handleLoad = () => {
-    clearTimeout(timeoutRef.current);
+    clearTimeout(slowTimerRef.current);
+    clearTimeout(hardTimerRef.current);
     setStatus('ready');
     onStatusChange?.('ready');
   };
@@ -46,9 +67,11 @@ export default function PowerBIFrame({ dashboard, reloadKey, onStatusChange }) {
     setRetryNonce((n) => n + 1);
   };
 
+  const showLoader = status === 'loading' || status === 'slow';
+
   return (
     <div className="powerbi-container">
-      {status === 'loading' && <Loader nome={dashboard.nome} />}
+      {showLoader && <Loader nome={dashboard.nome} slow={status === 'slow'} />}
       {status === 'error' && <ErrorState onRetry={handleRetry} />}
 
       <iframe

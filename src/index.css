@@ -819,32 +819,49 @@ a {
   }
 }
 
-.loader__rings {
-  position: relative;
-  width: 46px;
-  height: 46px;
+/* Barrinhas de gráfico pulsando — reforça o tema de BI (e ecoa o motivo
+   de barras da própria logo), em vez de um spinner genérico. */
+.loader__bars {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  height: 34px;
 }
 
-.loader__ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: var(--brand-gold);
-  border-right-color: var(--brand-gold);
-  animation: spin 900ms linear infinite;
+.loader__bars span {
+  width: 7px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--brand-navy-pale), var(--brand-navy));
+  animation: bar-pulse 1.1s ease-in-out infinite;
+  transform-origin: bottom;
 }
 
-.loader__ring--2 {
-  inset: 8px;
-  border-top-color: var(--brand-navy-pale);
-  border-right-color: transparent;
-  animation-duration: 1300ms;
-  animation-direction: reverse;
-  opacity: 0.7;
+.loader__bars span:nth-child(1) {
+  height: 42%;
+  animation-delay: 0s;
+}
+
+.loader__bars span:nth-child(2) {
+  height: 100%;
+  animation-delay: 0.15s;
+  background: linear-gradient(180deg, var(--brand-gold), var(--brand-navy-pale));
+}
+
+.loader__bars span:nth-child(3) {
+  height: 65%;
+  animation-delay: 0.3s;
+}
+
+@keyframes bar-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
 .loader__text {
@@ -852,6 +869,7 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  max-width: 260px;
 }
 
 .loader__title {
@@ -865,6 +883,13 @@ a {
   margin: 0;
   font-size: 12.5px;
   color: var(--text-3);
+  text-align: center;
+  line-height: 1.5;
+  transition: color var(--duration-base) var(--ease);
+}
+
+.loader__msg.is-slow {
+  color: var(--brand-gold);
 }
 
 /* ==========================================================================

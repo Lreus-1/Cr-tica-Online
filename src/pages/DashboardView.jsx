@@ -37,7 +37,7 @@ export default function DashboardView() {
   };
 
   const active = iosFallback ? iosFullscreen : isFullscreen;
-  const isLoading = status === 'loading';
+  const isLoading = status === 'loading' || status === 'slow';
 
   return (
     <div

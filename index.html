@@ -26,6 +26,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
 
+    <!-- Preconnect com o Power BI: abre a conexão (DNS + TLS) assim que o
+         app inicia, antes mesmo de a pessoa tocar num card — economiza
+         parte do tempo de handshake quando o relatório começa a carregar. -->
+    <link rel="preconnect" href="https://app.powerbi.com" crossorigin />
+    <link rel="dns-prefetch" href="https://app.powerbi.com" />
+
     <!-- Google AdSense: carregado direto no <head>, como o Google recomenda,
          em vez de só via JS — ajuda na verificação do site e em Auto ads.
          O bloco de anúncio em si (<ins>) é renderizado pelo componente
