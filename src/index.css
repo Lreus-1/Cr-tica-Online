@@ -556,6 +556,37 @@ a {
   border: 1px solid var(--border);
   border-radius: var(--radius-xs);
   color: var(--text-2);
+  flex-shrink: 0;
+}
+
+.home__footer-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.home__footer-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  flex-shrink: 0;
+  transition: color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease-spring);
+}
+
+@media (hover: hover) {
+  .home__footer-contact:hover {
+    color: var(--brand-gold);
+    border-color: var(--brand-gold-glow);
+  }
+}
+
+.home__footer-contact:active {
+  transform: scale(0.9);
 }
 
 /* ==========================================================================

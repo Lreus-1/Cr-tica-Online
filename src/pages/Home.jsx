@@ -1,7 +1,9 @@
+import { Instagram } from 'lucide-react';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
 import AdSlot from '../components/AdSlot.jsx';
+import { contactLinks } from '../config/contact.js';
 
 export default function Home() {
   return (
@@ -49,7 +51,18 @@ export default function Home() {
 
       <footer className="home__footer">
         <span className="home__footer-tag">POWER BI</span>
-        Conteúdo renderizado a partir de relatórios publicados na web.
+        <span className="home__footer-text">
+          Conteúdo renderizado a partir de relatórios publicados na web.
+        </span>
+        <a
+          href={contactLinks.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home__footer-contact"
+          aria-label="Fale com a LUVI BI no Instagram"
+        >
+          <Instagram size={15} strokeWidth={1.75} />
+        </a>
       </footer>
     </div>
   );
