@@ -17,6 +17,7 @@ import {
   Trophy,
   Activity,
   Wallet,
+  BookUser,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -28,4 +29,5 @@ export const iconMap = {
   Trophy,
   Activity,
   Wallet,
+  BookUser,
 };
