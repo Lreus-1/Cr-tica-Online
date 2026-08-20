@@ -1,4 +1,5 @@
-import { Instagram } from 'lucide-react';
+import { Instagram, Images, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
@@ -46,6 +47,18 @@ export default function Home() {
           <DashboardCard key={dashboard.id} dashboard={dashboard} index={index} />
         ))}
       </nav>
+
+      <div className="home__section-label">Materiais</div>
+      <Link to="/acervo" className="dash-row">
+        <span className="dash-row__icon">
+          <Images size={18} strokeWidth={1.75} />
+        </span>
+        <span className="dash-row__body">
+          <span className="dash-row__title">Acervo de artes</span>
+          <span className="dash-row__desc">Baixe as artes promocionais para divulgação</span>
+        </span>
+        <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
+      </Link>
 
       <AdSlot />
 

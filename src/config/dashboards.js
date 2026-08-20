@@ -19,7 +19,7 @@ export const dashboards = [
     nome: 'Crítica Online 2.0',
     descricao: 'Indicadores e análises em tempo real',
     icone: 'BarChart3',
-    url: 'https://app.powerbi.com/view?r=eyJrIjoiZDYzODRkZDktOGUxNC00NTcyLTk4ZDMtYjMzMTEzZTRmZDhiIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
+    url: 'https://app.powerbi.com/view?r=eyJrIjoiMjkwYjM5NjEtZWExNC00ZDkxLTlmMWItZjg1NmE2MzgyYWRkIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
   },
   {
     id: 'remuneracao',

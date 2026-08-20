@@ -590,6 +590,138 @@ a {
 }
 
 /* ==========================================================================
+   Acervo de artes (galeria)
+   ========================================================================== */
+.gallery {
+  min-height: 100dvh;
+  max-width: var(--content-width-lg);
+  margin: 0 auto;
+  padding: calc(var(--safe-top) + var(--space-4)) max(var(--page-padding-x), var(--safe-left))
+    calc(var(--safe-bottom) + var(--space-6)) max(var(--page-padding-x), var(--safe-right));
+}
+
+.gallery__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.gallery__title-group {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.gallery__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+
+.gallery__badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-3);
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.gallery-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.gallery-item__thumb {
+  aspect-ratio: 1 / 1;
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+
+.gallery-item__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.gallery-item__text {
+  min-width: 0;
+  flex: 1;
+}
+
+.gallery-item__name {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gallery-item__format {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.gallery-item__download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  flex-shrink: 0;
+  transition: background-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease-spring);
+}
+
+@media (hover: hover) {
+  .gallery-item__download:hover {
+    background: var(--brand-navy);
+    color: #fff;
+    border-color: var(--brand-navy);
+  }
+}
+
+.gallery-item__download:active {
+  transform: scale(0.9);
+}
+
+.gallery__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 13px;
+  padding: var(--space-8) 0;
+}
+
+@media (min-width: 640px) {
+  .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
    Dashboard view — a navegação recua para dar protagonismo ao relatório
    ========================================================================== */
 .dashboard-view {
