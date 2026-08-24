@@ -1,4 +1,4 @@
-import { Instagram, Images, ChevronRight } from 'lucide-react';
+import { Instagram, Images, Target, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
@@ -59,6 +59,23 @@ export default function Home() {
         </span>
         <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
       </Link>
+
+      <div className="home__section-label">Ferramentas</div>
+      <a
+        href="https://acompanhamento-ln.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="dash-row"
+      >
+        <span className="dash-row__icon">
+          <Target size={18} strokeWidth={1.75} />
+        </span>
+        <span className="dash-row__body">
+          <span className="dash-row__title">Acompanhamento +LN</span>
+          <span className="dash-row__desc">Plano de metas Long Neck</span>
+        </span>
+        <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
+      </a>
 
       <AdSlot />
 
