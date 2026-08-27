@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { ArrowLeft, RotateCw, Maximize2, Minimize2 } from 'lucide-react';
 import { getDashboardById } from '../config/dashboards.js';
+import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
 
@@ -17,7 +18,10 @@ function isIOS() {
 
 export default function DashboardView() {
   const { id } = useParams();
-  const dashboard = getDashboardById(id);
+  const navigate = useNavigate();
+  // Um painel pode vir tanto da lista do Comercial quanto da Entrega —
+  // procura nos dois, já que essa rota é compartilhada pelos dois setores.
+  const dashboard = getDashboardById(id) || getDeliveryDashboardById(id);
   const containerRef = useRef(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [iosFullscreen, setIosFullscreen] = useState(false);
@@ -46,9 +50,14 @@ export default function DashboardView() {
     >
       {!active && (
         <header className="dashboard-view__header">
-          <Link to="/" className="dv-btn" aria-label="Voltar">
+          <button
+            className="dv-btn"
+            onClick={() => navigate(-1)}
+            aria-label="Voltar"
+            type="button"
+          >
             <ArrowLeft size={17} strokeWidth={2} />
-          </Link>
+          </button>
 
           <div className="dashboard-view__title-group">
             <h1 className="dashboard-view__title">{dashboard.nome}</h1>

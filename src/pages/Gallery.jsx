@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Download } from 'lucide-react';
 import { galleryTitleOverrides } from '../config/gallery.js';
 
@@ -58,12 +58,14 @@ function GalleryItem({ item }) {
 }
 
 export default function Gallery() {
+  const navigate = useNavigate();
+
   return (
     <div className="gallery">
       <header className="gallery__header">
-        <Link to="/" className="dv-btn" aria-label="Voltar">
+        <button className="dv-btn" onClick={() => navigate(-1)} aria-label="Voltar" type="button">
           <ArrowLeft size={17} strokeWidth={2} />
-        </Link>
+        </button>
         <div className="gallery__title-group">
           <h1 className="gallery__title">Acervo de artes</h1>
           <span className="gallery__badge">{galleryItems.length} arquivos</span>
