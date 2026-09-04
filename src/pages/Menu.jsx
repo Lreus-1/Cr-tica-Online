@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Truck, Briefcase, ArrowRight } from 'lucide-react';
+import { Truck, Briefcase, ShieldCheck, ArrowRight } from 'lucide-react';
 import LuviMark from '../components/LuviMark.jsx';
 
 export default function Menu() {
@@ -39,6 +39,14 @@ export default function Menu() {
             <Briefcase size={26} strokeWidth={1.75} />
           </span>
           <span className="menu-option__label">Comercial</span>
+          <ArrowRight className="menu-option__arrow" size={18} strokeWidth={2} />
+        </Link>
+
+        <Link to="/seguranca" className="menu-option">
+          <span className="menu-option__icon">
+            <ShieldCheck size={26} strokeWidth={1.75} />
+          </span>
+          <span className="menu-option__label">Segurança</span>
           <ArrowRight className="menu-option__arrow" size={18} strokeWidth={2} />
         </Link>
       </div>

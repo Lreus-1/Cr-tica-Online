@@ -28,13 +28,6 @@ export const dashboards = [
     icone: 'Wallet',
     url: 'https://app.powerbi.com/view?r=eyJrIjoiNTJjNTdhMTItMTAxZi00NDYwLWFjZDQtNDhmNGQyYjk2YTY4IiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
   },
-  {
-    id: 'prontuario-condutor-dpo',
-    nome: 'Prontuário Condutor DPO',
-    descricao: 'Registro e conformidade dos condutores',
-    icone: 'BookUser',
-    url: 'https://app.powerbi.com/view?r=eyJrIjoiNzBkMzEzMTUtMGI3NC00ZmZiLWI1YTAtOTlkYmJlYTVmZDk0IiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
-  },
 
   // Exemplo de como adicionar um novo dashboard futuramente:
   // {

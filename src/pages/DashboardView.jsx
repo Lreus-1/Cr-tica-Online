@@ -3,6 +3,7 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { ArrowLeft, RotateCw, Maximize2, Minimize2 } from 'lucide-react';
 import { getDashboardById } from '../config/dashboards.js';
 import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
+import { getSecurityDashboardById } from '../config/securityDashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
 
@@ -19,9 +20,10 @@ function isIOS() {
 export default function DashboardView() {
   const { id } = useParams();
   const navigate = useNavigate();
-  // Um painel pode vir tanto da lista do Comercial quanto da Entrega —
-  // procura nos dois, já que essa rota é compartilhada pelos dois setores.
-  const dashboard = getDashboardById(id) || getDeliveryDashboardById(id);
+  // Um painel pode vir da lista do Comercial, da Entrega ou da
+  // Segurança — procura nas três, já que essa rota é compartilhada.
+  const dashboard =
+    getDashboardById(id) || getDeliveryDashboardById(id) || getSecurityDashboardById(id);
   const containerRef = useRef(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [iosFullscreen, setIosFullscreen] = useState(false);
