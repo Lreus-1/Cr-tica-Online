@@ -5,6 +5,7 @@ import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
 import AdSlot from '../components/AdSlot.jsx';
 import { contactLinks } from '../config/contact.js';
+import { externalLinkProps } from '../lib/externalLink.js';
 
 export default function Home() {
   return (
@@ -62,9 +63,7 @@ export default function Home() {
 
       <div className="home__section-label">Ferramentas</div>
       <a
-        href="https://acompanhamento-ln.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
+        {...externalLinkProps('https://acompanhamento-ln.vercel.app/')}
         className="dash-row"
       >
         <span className="dash-row__icon">
@@ -77,9 +76,7 @@ export default function Home() {
         <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
       </a>
       <a
-        href="https://acompanhamento-task.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
+        {...externalLinkProps('https://acompanhamento-task.vercel.app/')}
         className="dash-row"
       >
         <span className="dash-row__icon">

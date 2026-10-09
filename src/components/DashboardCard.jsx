@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, BarChart3 } from 'lucide-react';
 import { iconMap } from '../lib/icons.js';
 import BorderBeam from './BorderBeam.jsx';
+import { externalLinkProps } from '../lib/externalLink.js';
 
 export default function DashboardCard({ dashboard, index }) {
   const Icon = iconMap[dashboard.icone] || BarChart3;
@@ -28,9 +29,7 @@ export default function DashboardCard({ dashboard, index }) {
   if (dashboard.externo) {
     return (
       <a
-        href={dashboard.url}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...externalLinkProps(dashboard.url)}
         className="dash-row"
         role="listitem"
         style={{ animationDelay: `${index * 45}ms` }}
