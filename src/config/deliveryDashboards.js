@@ -11,11 +11,9 @@ export const deliveryDashboards = [
     nome: 'Remuneração Entrega',
     descricao: 'Remuneração de motoristas e ajudantes',
     icone: 'Truck',
-    // Página própria (não é Power BI): abre dentro do app, com um botão
-    // extra no cabeçalho pra abrir em nova aba caso o login não funcione
-    // dentro do quadro.
-    badge: 'PORTAL',
-    abrirFora: true,
+    // Página própria (com login), não é Power BI: abre em nova aba,
+    // porque o servidor dela não permite ser exibido dentro do app.
+    externo: true,
     url: 'https://leather-upgrade-anthony-herbal.trycloudflare.com',
   },
 ];
