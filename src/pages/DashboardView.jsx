@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import { ArrowLeft, RotateCw, Maximize2, Minimize2 } from 'lucide-react';
+import { ArrowLeft, RotateCw, Maximize2, Minimize2, ExternalLink } from 'lucide-react';
 import { getDashboardById } from '../config/dashboards.js';
 import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
 import { getSecurityDashboardById } from '../config/securityDashboards.js';
@@ -63,10 +63,21 @@ export default function DashboardView() {
 
           <div className="dashboard-view__title-group">
             <h1 className="dashboard-view__title">{dashboard.nome}</h1>
-            <span className="dashboard-view__badge">POWER BI</span>
+            <span className="dashboard-view__badge">{dashboard.badge || 'POWER BI'}</span>
           </div>
 
           <div className="dashboard-view__actions">
+            {dashboard.abrirFora && (
+              <a
+                className="dv-btn"
+                href={dashboard.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir em nova aba"
+              >
+                <ExternalLink size={16} strokeWidth={2} />
+              </a>
+            )}
             <button
               className="dv-btn"
               onClick={() => setReloadKey((k) => k + 1)}
