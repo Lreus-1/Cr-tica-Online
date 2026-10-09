@@ -9,13 +9,8 @@ export default function DashboardCard({ dashboard, index }) {
   // "sincronizados" quando há mais de um na lista.
   const beamDuration = 6 + index * 3.5;
 
-  return (
-    <Link
-      to={`/dashboard/${dashboard.id}`}
-      className="dash-row"
-      role="listitem"
-      style={{ animationDelay: `${index * 45}ms` }}
-    >
+  const content = (
+    <>
       <BorderBeam radius={18} duration={beamDuration} />
       <span className="dash-row__icon">
         <Icon size={18} strokeWidth={1.75} />
@@ -25,6 +20,34 @@ export default function DashboardCard({ dashboard, index }) {
         <span className="dash-row__desc">{dashboard.descricao}</span>
       </span>
       <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
+    </>
+  );
+
+  // Painéis marcados como `externo` (páginas próprias, fora do Power BI)
+  // abrem em nova aba em vez de dentro do visualizador.
+  if (dashboard.externo) {
+    return (
+      <a
+        href={dashboard.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="dash-row"
+        role="listitem"
+        style={{ animationDelay: `${index * 45}ms` }}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      to={`/dashboard/${dashboard.id}`}
+      className="dash-row"
+      role="listitem"
+      style={{ animationDelay: `${index * 45}ms` }}
+    >
+      {content}
     </Link>
   );
 }

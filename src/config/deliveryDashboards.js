@@ -9,9 +9,11 @@ export const deliveryDashboards = [
   {
     id: 'painel-motorista',
     nome: 'Remuneração Entrega',
-    descricao: 'Indicadores da rota e das entregas',
+    descricao: 'Remuneração de motoristas e ajudantes',
     icone: 'Truck',
-    url: 'https://app.powerbi.com/view?r=eyJrIjoiMmZmYWU0MTItMDA4ZS00YzMwLWExNzctOWY2YWYwNzZiNmI3IiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
+    // Página própria (com login), não é Power BI: abre em nova aba.
+    externo: true,
+    url: 'https://leather-upgrade-anthony-herbal.trycloudflare.com',
   },
 ];
 
