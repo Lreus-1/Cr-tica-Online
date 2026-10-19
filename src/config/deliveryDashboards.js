@@ -14,7 +14,7 @@ export const deliveryDashboards = [
     // Página própria (com login), não é Power BI: abre em nova aba,
     // porque o servidor dela não permite ser exibido dentro do app.
     externo: true,
-    url: 'https://leather-upgrade-anthony-herbal.trycloudflare.com',
+    url: 'https://news-joining-reason-preferences.trycloudflare.com/',
   },
 ];
 
