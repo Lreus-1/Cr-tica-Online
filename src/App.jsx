@@ -4,6 +4,8 @@ import Menu from './pages/Menu.jsx';
 import Home from './pages/Home.jsx';
 import Delivery from './pages/Delivery.jsx';
 import Security from './pages/Security.jsx';
+import Finance from './pages/Finance.jsx';
+import People from './pages/People.jsx';
 import DashboardView from './pages/DashboardView.jsx';
 import Gallery from './pages/Gallery.jsx';
 
@@ -15,6 +17,8 @@ export default function App() {
         <Route path="/comercial" element={<Home />} />
         <Route path="/entrega" element={<Delivery />} />
         <Route path="/seguranca" element={<Security />} />
+        <Route path="/financeiro" element={<Finance />} />
+        <Route path="/gente-e-gestao" element={<People />} />
         <Route path="/dashboard/:id" element={<DashboardView />} />
         <Route path="/acervo" element={<Gallery />} />
         <Route path="*" element={<Menu />} />

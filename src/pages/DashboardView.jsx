@@ -4,6 +4,7 @@ import { ArrowLeft, RotateCw, Maximize2, Minimize2, ExternalLink } from 'lucide-
 import { getDashboardById } from '../config/dashboards.js';
 import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
 import { getSecurityDashboardById } from '../config/securityDashboards.js';
+import { getPeopleDashboardById } from '../config/peopleDashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
 
@@ -23,7 +24,10 @@ export default function DashboardView() {
   // Um painel pode vir da lista do Comercial, da Entrega ou da
   // Segurança — procura nas três, já que essa rota é compartilhada.
   const dashboard =
-    getDashboardById(id) || getDeliveryDashboardById(id) || getSecurityDashboardById(id);
+    getDashboardById(id) ||
+    getDeliveryDashboardById(id) ||
+    getSecurityDashboardById(id) ||
+    getPeopleDashboardById(id);
   const containerRef = useRef(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [iosFullscreen, setIosFullscreen] = useState(false);

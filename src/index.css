@@ -848,7 +848,8 @@ a {
   }
 
   .menu__options {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   }
 
   .menu-option {
