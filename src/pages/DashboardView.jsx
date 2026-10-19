@@ -6,6 +6,7 @@ import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
 import { getSecurityDashboardById } from '../config/securityDashboards.js';
 import { getPeopleDashboardById } from '../config/peopleDashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
+import PinGate from '../components/PinGate.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
 
 // Detecta Safari em iOS, onde a Fullscreen API não é suportada para
@@ -18,7 +19,7 @@ function isIOS() {
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
 
-export default function DashboardView() {
+function DashboardContent() {
   const { id } = useParams();
   const navigate = useNavigate();
   // Um painel pode vir da lista do Comercial, da Entrega ou da
@@ -120,5 +121,26 @@ export default function DashboardView() {
 
       <PowerBIFrame dashboard={dashboard} reloadKey={reloadKey} onStatusChange={setStatus} />
     </div>
+  );
+}
+
+// Painéis de setores com senha também pedem a senha ao abrir direto
+// pelo endereço (sem passar pela tela do setor).
+function setorDoPainel(id) {
+  if (getSecurityDashboardById(id)) return { setor: 'seguranca', nome: 'Segurança' };
+  if (getPeopleDashboardById(id)) return { setor: 'gente-e-gestao', nome: 'Gente e Gestão' };
+  return null;
+}
+
+export default function DashboardView() {
+  const { id } = useParams();
+  const protegido = setorDoPainel(id);
+
+  if (!protegido) return <DashboardContent />;
+
+  return (
+    <PinGate setor={protegido.setor} nome={protegido.nome}>
+      <DashboardContent />
+    </PinGate>
   );
 }
