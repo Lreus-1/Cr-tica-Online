@@ -16,10 +16,15 @@
 export const dashboards = [
   {
     id: 'critica-online',
-    nome: 'Crítica Online 2.0',
+    nome: 'Crítica Online 3.0',
     descricao: 'Indicadores e análises em tempo real',
     icone: 'BarChart3',
-    url: 'https://app.powerbi.com/view?r=eyJrIjoiZDYzODRkZDktOGUxNC00NTcyLTk4ZDMtYjMzMTEzZTRmZDhiIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
+    // Servidor da rede interna (http), não é Power BI: abre em nova aba.
+    // Só funciona com o celular/computador na rede da empresa.
+    externo: true,
+    url: 'http://192.168.4.128:8060/#mobile',
+    // Link antigo (Crítica Online 2.0, Power BI), caso precise voltar:
+    // https://app.powerbi.com/view?r=eyJrIjoiZDYzODRkZDktOGUxNC00NTcyLTk4ZDMtYjMzMTEzZTRmZDhiIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9
   },
   {
     id: 'remuneracao',
