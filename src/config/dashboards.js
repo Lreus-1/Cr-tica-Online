@@ -34,6 +34,26 @@ export const dashboards = [
     url: 'https://app.powerbi.com/view?r=eyJrIjoiNTJjNTdhMTItMTAxZi00NDYwLWFjZDQtNDhmNGQyYjk2YTY4IiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
   },
 
+  {
+    id: 'nao-compradores',
+    nome: 'Não compradores',
+    descricao: 'Clientes sem compra no período',
+    icone: 'UserMinus',
+    // Servidor da rede interna (http), não é Power BI: abre em nova aba.
+    // Só funciona com o celular/computador na rede da empresa.
+    externo: true,
+    url: 'http://192.168.4.128:8060/#naocompradores',
+  },
+  {
+    id: 'acompanhamento-tarefas',
+    nome: 'Acompanhamento de Tarefas',
+    descricao: 'Tarefas comerciais por cliente',
+    icone: 'ListChecks',
+    // Ferramenta própria (fora do Power BI): abre em nova aba.
+    externo: true,
+    url: 'https://acompanhamento-task.vercel.app/',
+  },
+
   // Exemplo de como adicionar um novo dashboard futuramente:
   // {
   //   id: 'comercial',

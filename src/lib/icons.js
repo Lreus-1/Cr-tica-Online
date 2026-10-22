@@ -21,6 +21,8 @@ import {
   Truck,
   HandCoins,
   UserX,
+  UserMinus,
+  ListChecks,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -36,4 +38,6 @@ export const iconMap = {
   Truck,
   HandCoins,
   UserX,
+  UserMinus,
+  ListChecks,
 };
