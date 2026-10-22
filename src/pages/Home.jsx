@@ -1,4 +1,4 @@
-import { Instagram, Images, Target, ListChecks, ChevronRight } from 'lucide-react';
+import { Instagram, Images, Target, ListChecks, UserMinus, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
@@ -85,6 +85,20 @@ export default function Home() {
         <span className="dash-row__body">
           <span className="dash-row__title">Acompanhamento de Tarefas</span>
           <span className="dash-row__desc">Tarefas comerciais por cliente</span>
+        </span>
+        <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
+      </a>
+      {/* Servidor da rede interna (http): só abre com a rede da empresa. */}
+      <a
+        {...externalLinkProps('http://192.168.4.128:8060/#naocompradores')}
+        className="dash-row"
+      >
+        <span className="dash-row__icon">
+          <UserMinus size={18} strokeWidth={1.75} />
+        </span>
+        <span className="dash-row__body">
+          <span className="dash-row__title">Acompanhamento Não Compradores</span>
+          <span className="dash-row__desc">Clientes sem compra no período</span>
         </span>
         <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
       </a>
