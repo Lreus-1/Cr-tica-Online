@@ -54,6 +54,17 @@ export const dashboards = [
     url: 'https://acompanhamento-task.vercel.app/',
   },
 
+  {
+    id: 'minha-rota',
+    nome: 'Minha rota',
+    descricao: 'Sua rota do dia',
+    icone: 'MapPin',
+    // Servidor da rede interna (http), não é Power BI: abre em nova aba.
+    // Só funciona com o celular/computador na rede da empresa.
+    externo: true,
+    url: 'http://192.168.4.128:8060/#rota',
+  },
+
   // Exemplo de como adicionar um novo dashboard futuramente:
   // {
   //   id: 'comercial',

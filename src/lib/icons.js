@@ -23,6 +23,7 @@ import {
   UserX,
   UserMinus,
   ListChecks,
+  MapPin,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -40,4 +41,5 @@ export const iconMap = {
   UserX,
   UserMinus,
   ListChecks,
+  MapPin,
 };
