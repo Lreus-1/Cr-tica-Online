@@ -24,6 +24,7 @@ import {
   UserMinus,
   ListChecks,
   MapPin,
+  Beer,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -42,4 +43,5 @@ export const iconMap = {
   UserMinus,
   ListChecks,
   MapPin,
+  Beer,
 };

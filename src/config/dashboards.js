@@ -65,6 +65,16 @@ export const dashboards = [
     url: 'http://192.168.4.128:8060/#rota',
   },
 
+  {
+    id: 'distribuicao-cerveja',
+    nome: 'Distribuição de Cerveja',
+    descricao: 'Distribuição da cesta de cervejas por cliente',
+    icone: 'Beer',
+    // Ferramenta própria (fora do Power BI): abre em nova aba.
+    externo: true,
+    url: 'https://distribuicao-cerveja.vercel.app/',
+  },
+
   // Exemplo de como adicionar um novo dashboard futuramente:
   // {
   //   id: 'comercial',
