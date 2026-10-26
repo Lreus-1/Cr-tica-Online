@@ -25,6 +25,8 @@ import {
   ListChecks,
   MapPin,
   Beer,
+  TrendingDown,
+  FileText,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -44,4 +46,6 @@ export const iconMap = {
   ListChecks,
   MapPin,
   Beer,
+  TrendingDown,
+  FileText,
 };

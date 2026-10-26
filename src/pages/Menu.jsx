@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Truck, Briefcase, ShieldCheck, Landmark, UsersRound, ArrowRight } from 'lucide-react';
+import { Truck, Briefcase, ShieldCheck, Landmark, UsersRound, TrendingUp, ArrowRight } from 'lucide-react';
 import LuviMark from '../components/LuviMark.jsx';
 
 export default function Menu() {
@@ -63,6 +63,14 @@ export default function Menu() {
             <UsersRound size={26} strokeWidth={1.75} />
           </span>
           <span className="menu-option__label">Gente e Gestão</span>
+          <ArrowRight className="menu-option__arrow" size={18} strokeWidth={2} />
+        </Link>
+
+        <Link to="/gestao-comercial" className="menu-option">
+          <span className="menu-option__icon">
+            <TrendingUp size={26} strokeWidth={1.75} />
+          </span>
+          <span className="menu-option__label">Gestão Comercial</span>
           <ArrowRight className="menu-option__arrow" size={18} strokeWidth={2} />
         </Link>
       </div>

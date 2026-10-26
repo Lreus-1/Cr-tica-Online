@@ -5,6 +5,7 @@ import { getDashboardById } from '../config/dashboards.js';
 import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
 import { getSecurityDashboardById } from '../config/securityDashboards.js';
 import { getPeopleDashboardById } from '../config/peopleDashboards.js';
+import { getGestaoComercialDashboardById } from '../config/gestaoComercialDashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import PinGate from '../components/PinGate.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
@@ -28,7 +29,8 @@ function DashboardContent() {
     getDashboardById(id) ||
     getDeliveryDashboardById(id) ||
     getSecurityDashboardById(id) ||
-    getPeopleDashboardById(id);
+    getPeopleDashboardById(id) ||
+    getGestaoComercialDashboardById(id);
   const containerRef = useRef(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [iosFullscreen, setIosFullscreen] = useState(false);
@@ -129,6 +131,7 @@ function DashboardContent() {
 function setorDoPainel(id) {
   if (getSecurityDashboardById(id)) return { setor: 'seguranca', nome: 'Segurança' };
   if (getPeopleDashboardById(id)) return { setor: 'gente-e-gestao', nome: 'Gente e Gestão' };
+  if (getGestaoComercialDashboardById(id)) return { setor: 'gestao-comercial', nome: 'Gestão Comercial' };
   return null;
 }
 

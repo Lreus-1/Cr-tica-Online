@@ -6,6 +6,7 @@ import Delivery from './pages/Delivery.jsx';
 import Security from './pages/Security.jsx';
 import Finance from './pages/Finance.jsx';
 import People from './pages/People.jsx';
+import CommercialManagement from './pages/CommercialManagement.jsx';
 import PinGate from './components/PinGate.jsx';
 import DashboardView from './pages/DashboardView.jsx';
 import Gallery from './pages/Gallery.jsx';
@@ -38,6 +39,14 @@ export default function App() {
           element={
             <PinGate setor="gente-e-gestao" nome="Gente e Gestão">
               <People />
+            </PinGate>
+          }
+        />
+        <Route
+          path="/gestao-comercial"
+          element={
+            <PinGate setor="gestao-comercial" nome="Gestão Comercial">
+              <CommercialManagement />
             </PinGate>
           }
         />

@@ -13,4 +13,5 @@ export const sectorPins = {
   'gente-e-gestao': '1201',
   seguranca: '1202',
   financeiro: '1203',
+  'gestao-comercial': '1991',
 };
