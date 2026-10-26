@@ -11,10 +11,10 @@ export const deliveryDashboards = [
     nome: 'Remuneração Entrega',
     descricao: 'Remuneração de motoristas e ajudantes',
     icone: 'Truck',
-    // Página própria (com login), não é Power BI: abre em nova aba,
-    // porque o servidor dela não permite ser exibido dentro do app.
+    // Servidor da rede interna (http), não é Power BI: abre em nova aba.
+    // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'https://news-joining-reason-preferences.trycloudflare.com/',
+    url: 'http://192.168.4.128:8090/',
   },
 ];
 
