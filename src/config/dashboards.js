@@ -72,7 +72,7 @@ export const dashboards = [
     icone: 'Beer',
     // Ferramenta própria (fora do Power BI): abre em nova aba.
     externo: true,
-    url: 'https://distribuicao-cerveja.vercel.app/',
+    url: 'http://192.168.4.128:8098/',
   },
 
   // Exemplo de como adicionar um novo dashboard futuramente:
