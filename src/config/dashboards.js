@@ -22,7 +22,7 @@ export const dashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'http://192.168.4.128:8060/#mobile',
+    url: 'http://192.168.4.8:8060/#mobile',
     // Link antigo (Crítica Online 2.0, Power BI), caso precise voltar:
     // https://app.powerbi.com/view?r=eyJrIjoiZDYzODRkZDktOGUxNC00NTcyLTk4ZDMtYjMzMTEzZTRmZDhiIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9
   },
@@ -42,7 +42,7 @@ export const dashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'http://192.168.4.128:8060/#naocompradores',
+    url: 'http://192.168.4.8:8060/#naocompradores',
   },
   {
     id: 'acompanhamento-tarefas',
@@ -62,7 +62,7 @@ export const dashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'http://192.168.4.128:8060/#rota',
+    url: 'http://192.168.4.8:8060/#rota',
   },
 
   {
@@ -72,7 +72,7 @@ export const dashboards = [
     icone: 'Beer',
     // Ferramenta própria (fora do Power BI): abre em nova aba.
     externo: true,
-    url: 'http://192.168.4.128:8098/',
+    url: 'http://192.168.4.8:8098/',
   },
 
   // Exemplo de como adicionar um novo dashboard futuramente:
