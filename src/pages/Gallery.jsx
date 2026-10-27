@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Download } from 'lucide-react';
 import { galleryTitleOverrides } from '../config/gallery.js';
+import OperacaoSelo from '../components/OperacaoSelo.jsx';
 
 // O Vite importa automaticamente qualquer imagem desta pasta — não é
 // preciso listar os arquivos em lugar nenhum. Basta soltar um novo
@@ -70,6 +71,7 @@ export default function Gallery() {
           <h1 className="gallery__title">Acervo de artes</h1>
           <span className="gallery__badge">{galleryItems.length} arquivos</span>
         </div>
+        <OperacaoSelo />
       </header>
 
       <main className="gallery__grid">

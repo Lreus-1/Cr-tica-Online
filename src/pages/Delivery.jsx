@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { deliveryDashboards } from '../config/deliveryDashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
+import OperacaoSelo from '../components/OperacaoSelo.jsx';
 
 export default function Delivery() {
   return (
@@ -24,6 +25,7 @@ export default function Delivery() {
             <p className="home__name">LUVI BI</p>
             <p className="home__eyebrow">Entrega</p>
           </div>
+          <OperacaoSelo />
         </div>
 
         <h1 className="home__title">Painéis</h1>

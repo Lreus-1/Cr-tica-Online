@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Truck, Briefcase, ShieldCheck, Landmark, UsersRound, TrendingUp, ArrowRight } from 'lucide-react';
 import LuviMark from '../components/LuviMark.jsx';
+import OperacaoSelo from '../components/OperacaoSelo.jsx';
 
 export default function Menu() {
   return (
@@ -18,6 +19,7 @@ export default function Menu() {
           <p className="home__name">LUVI BI</p>
           <p className="home__eyebrow">Portal de indicadores</p>
         </div>
+          <OperacaoSelo />
       </header>
 
       <div className="menu__intro">

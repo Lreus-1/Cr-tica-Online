@@ -8,12 +8,14 @@ import Finance from './pages/Finance.jsx';
 import People from './pages/People.jsx';
 import CommercialManagement from './pages/CommercialManagement.jsx';
 import PinGate from './components/PinGate.jsx';
+import FundoOperacao from './components/FundoOperacao.jsx';
 import DashboardView from './pages/DashboardView.jsx';
 import Gallery from './pages/Gallery.jsx';
 
 export default function App() {
   return (
     <>
+      <FundoOperacao />
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/comercial" element={<Home />} />

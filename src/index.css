@@ -29,7 +29,7 @@
   /* ---- Texto -------------------------------------------------------------- */
   --text-1: #f3f6fb;
   --text-2: #a9b8cc;
-  --text-3: #6d7c93;
+  --text-3: #7a8aa2; /* kit v1.2: passa no contraste AA (o antigo #6d7c93 não passava) */
 
   /* ---- Tipografia ---------------------------------------------------------- */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -110,7 +110,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--brand-gold-glow);
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
   border-radius: var(--radius-xs);
 }
@@ -121,6 +121,144 @@ a {
   *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* ==========================================================================
+   Kit visual v1.2 — foto da operação e selo da operação
+   ========================================================================== */
+/* Foto da operação: duotone navy, muito discreta. Fica atrás de tudo (z-index
+   negativo) e a máscara dissolve a foto no fundo: topo e esquerda ficam lisos.
+   Os cards são opacos, então a foto nunca aparece atrás de número ou texto. */
+.op-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: 68% 72% / cover no-repeat;
+  opacity: 0.11; /* kit: entre 0.06 e 0.14 */
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 72% 74%, #000 18%, transparent 82%);
+  mask-image: radial-gradient(ellipse 95% 85% at 72% 74%, #000 18%, transparent 82%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .op-fundo {
+    animation: op-fundo-in 1.6s var(--ease) both;
+  }
+
+  @keyframes op-fundo-in {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+@media print {
+  .op-fundo {
+    display: none;
+  }
+}
+
+/* Selo da operação: pílula com ponto dourado e o nome da unidade atendida. */
+.op-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  font: 700 14px/1.2 var(--font-sans);
+  color: var(--text-1);
+  padding: 5px 11px;
+  border-radius: 99px;
+  border: 1px solid rgba(240, 200, 17, 0.35);
+  background: rgba(240, 200, 17, 0.08);
+  flex-shrink: 0;
+}
+
+.op-selo i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  box-shadow: 0 0 8px var(--brand-gold);
+}
+
+.home__brand .op-selo,
+.menu__header .op-selo,
+.gallery__header .op-selo {
+  margin-left: auto;
+}
+
+.pin__selo {
+  position: absolute;
+  top: calc(var(--safe-top) + var(--space-4));
+  right: max(var(--space-4), var(--safe-right));
+}
+
+/* No cabeçalho do relatório o espaço é curto: o selo aparece a partir de 560px. */
+.op-selo--larga {
+  display: none;
+}
+
+@media (min-width: 560px) {
+  .op-selo--larga {
+    display: inline-flex;
+  }
+}
+
+/* Fio dourado de 2px que se desenha no topo do card ao passar o mouse ou tocar
+   (kit v1.2, .lv-vivo). O card recorta o que está dentro, então o fio acompanha
+   os cantos arredondados. */
+.dash-row::before,
+.menu-option::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--brand-gold);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--duration-slow) var(--ease);
+}
+
+.dash-row:hover::before,
+.dash-row:active::before,
+.menu-option:hover::before,
+.menu-option:active::before {
+  transform: scaleX(1);
+}
+
+.dash-row:hover,
+.menu-option:hover {
+  border-color: var(--border-strong);
+}
+
+.menu-option {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Movimento reduzido: sem LED, sem deslocamento no hover, sem transições. */
+@media (prefers-reduced-motion: reduce) {
+  .border-beam {
+    display: none;
+  }
+
+  .dash-row,
+  .dash-row *,
+  .menu-option,
+  .menu-option * {
+    transition: none !important;
+  }
+
+  .dash-row:hover,
+  .dash-row:active,
+  .menu-option:hover,
+  .menu-option:active {
+    transform: none;
   }
 }
 
@@ -445,7 +583,7 @@ a {
 }
 
 .dash-row:hover .dash-row__icon {
-  transform: scale(1.06) rotate(-2deg);
+  transform: scale(1.08) rotate(-3deg);
 }
 
 .dash-row__body {

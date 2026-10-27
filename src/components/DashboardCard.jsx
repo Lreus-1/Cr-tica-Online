@@ -3,6 +3,7 @@ import { ChevronRight, BarChart3 } from 'lucide-react';
 import { iconMap } from '../lib/icons.js';
 import BorderBeam from './BorderBeam.jsx';
 import { externalLinkProps } from '../lib/externalLink.js';
+import { operacao } from '../config/operacao.js';
 
 export default function DashboardCard({ dashboard, index }) {
   const Icon = iconMap[dashboard.icone] || BarChart3;
@@ -12,7 +13,7 @@ export default function DashboardCard({ dashboard, index }) {
 
   const content = (
     <>
-      <BorderBeam radius={18} duration={beamDuration} />
+      {index < operacao.limiteDeLed && <BorderBeam radius={18} duration={beamDuration} />}
       <span className="dash-row__icon">
         <Icon size={18} strokeWidth={1.75} />
       </span>

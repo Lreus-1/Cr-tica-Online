@@ -8,6 +8,7 @@ import { getPeopleDashboardById } from '../config/peopleDashboards.js';
 import { getGestaoComercialDashboardById } from '../config/gestaoComercialDashboards.js';
 import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import PinGate from '../components/PinGate.jsx';
+import OperacaoSelo from '../components/OperacaoSelo.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
 
 // Detecta Safari em iOS, onde a Fullscreen API não é suportada para
@@ -72,6 +73,8 @@ function DashboardContent() {
             <h1 className="dashboard-view__title">{dashboard.nome}</h1>
             <span className="dashboard-view__badge">{dashboard.badge || 'POWER BI'}</span>
           </div>
+
+          <OperacaoSelo className="op-selo--larga" />
 
           <div className="dashboard-view__actions">
             {dashboard.abrirFora && (

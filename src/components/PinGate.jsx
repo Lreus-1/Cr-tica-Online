@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Lock } from 'lucide-react';
 import { isUnlocked, tryUnlock } from '../lib/access.js';
 import LuviMark from './LuviMark.jsx';
+import OperacaoSelo from './OperacaoSelo.jsx';
 
 /**
  * Pede a senha do setor antes de mostrar o conteúdo.
@@ -40,6 +41,8 @@ export default function PinGate({ setor, nome, children }) {
       <Link to="/" className="dv-btn pin__back" aria-label="Voltar ao menu">
         <ArrowLeft size={17} strokeWidth={2} />
       </Link>
+
+      <OperacaoSelo className="pin__selo" />
 
       <div className="pin__box">
         <span className="home__mark">

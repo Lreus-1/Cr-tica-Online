@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
+import OperacaoSelo from '../components/OperacaoSelo.jsx';
 import AdSlot from '../components/AdSlot.jsx';
 import { contactLinks } from '../config/contact.js';
 import { externalLinkProps } from '../lib/externalLink.js';
@@ -24,6 +25,7 @@ export default function Home() {
             <p className="home__name">LUVI BI</p>
             <p className="home__eyebrow">Portal de indicadores</p>
           </div>
+          <OperacaoSelo />
         </div>
 
         <h1 className="home__title">Painéis</h1>

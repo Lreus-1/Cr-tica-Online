@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import DashboardCard from './DashboardCard.jsx';
 import LuviMark from './LuviMark.jsx';
+import OperacaoSelo from './OperacaoSelo.jsx';
 
 /**
  * Tela de um setor: cabeçalho com o nome do setor + lista de painéis.
@@ -27,6 +28,7 @@ export default function SectorScreen({ setor, dashboards }) {
             <p className="home__name">LUVI BI</p>
             <p className="home__eyebrow">{setor}</p>
           </div>
+          <OperacaoSelo />
         </div>
 
         <h1 className="home__title">Painéis</h1>

@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { securityDashboards } from '../config/securityDashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
 import LuviMark from '../components/LuviMark.jsx';
+import OperacaoSelo from '../components/OperacaoSelo.jsx';
 
 export default function Security() {
   return (
@@ -24,6 +25,7 @@ export default function Security() {
             <p className="home__name">LUVI BI</p>
             <p className="home__eyebrow">Segurança</p>
           </div>
+          <OperacaoSelo />
         </div>
 
         <h1 className="home__title">Painéis</h1>
