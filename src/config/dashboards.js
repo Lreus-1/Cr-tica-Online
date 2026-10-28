@@ -22,7 +22,7 @@ export const dashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'https://likewise-movers-extensive-fisher.trycloudflare.com/#mobile',
+    url: 'https://critica-nuernberg.luvibi.com.br/#mobile',
     // Link antigo (Crítica Online 2.0, Power BI), caso precise voltar:
     // https://app.powerbi.com/view?r=eyJrIjoiZDYzODRkZDktOGUxNC00NTcyLTk4ZDMtYjMzMTEzZTRmZDhiIiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9
   },
@@ -42,7 +42,7 @@ export const dashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'https://likewise-movers-extensive-fisher.trycloudflare.com/#naocompradores',
+    url: 'https://critica-nuernberg.luvibi.com.br/#naocompradores',
   },
   {
     id: 'acompanhamento-tarefas',
@@ -62,7 +62,7 @@ export const dashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'https://likewise-movers-extensive-fisher.trycloudflare.com/#rota',
+    url: 'https://critica-nuernberg.luvibi.com.br/#rota',
   },
 
   {
@@ -72,7 +72,7 @@ export const dashboards = [
     icone: 'Beer',
     // Ferramenta própria (fora do Power BI): abre em nova aba.
     externo: true,
-    url: 'https://precisely-separate-european-environments.trycloudflare.com',
+    url: 'https://xn--distribuio-nuernberg-xyb1g.luvibi.com.br/',
   },
 
   // Exemplo de como adicionar um novo dashboard futuramente:

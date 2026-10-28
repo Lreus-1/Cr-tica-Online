@@ -14,7 +14,7 @@ export const deliveryDashboards = [
     // Servidor da rede interna (http), não é Power BI: abre em nova aba.
     // Só funciona com o celular/computador na rede da empresa.
     externo: true,
-    url: 'https://lens-securities-implementing-fcc.trycloudflare.com',
+    url: 'https://motoristas-nuernberg.luvibi.com.br/',
   },
 ];
 
