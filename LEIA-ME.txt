@@ -1,0 +1,16 @@
+ATUALIZACAO DO HUB DE PAINEIS
+
+Como aplicar:
+1. Extraia este zip POR CIMA da pasta "critica-online-portal" (a do Hub de Paineis),
+   aceitando substituir os arquivos.
+2. No terminal, dentro da pasta, rode UMA vez:   npm install
+   (entrou uma ferramenta nova, o vite-imagetools, que gera as miniaturas da galeria)
+3. Teste com:   npm run dev
+4. Para publicar, de dois cliques no atualizar.bat.
+
+Este zip NAO traz: a pasta .git, o atualizar.bat e as artes do acervo.
+Assim nada do que voce ja tem e sobrescrito.
+
+Pode apagar (nao sao mais usados):
+- src/assets/operacao.jpg      (foi trocada por operacao.webp, mais leve)
+- src/assets/Thumbs.db          (arquivo do Windows)

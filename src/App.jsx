@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Menu from './pages/Menu.jsx';
@@ -10,7 +11,8 @@ import CommercialManagement from './pages/CommercialManagement.jsx';
 import PinGate from './components/PinGate.jsx';
 import FundoOperacao from './components/FundoOperacao.jsx';
 import DashboardView from './pages/DashboardView.jsx';
-import Gallery from './pages/Gallery.jsx';
+// A galeria (com a lista de imagens) só é baixada quando a pessoa abre o acervo.
+const Gallery = lazy(() => import('./pages/Gallery.jsx'));
 
 export default function App() {
   return (
@@ -23,7 +25,7 @@ export default function App() {
         <Route
           path="/seguranca"
           element={
-            <PinGate setor="seguranca" nome="Segurança">
+            <PinGate key="seguranca" setor="seguranca" nome="Segurança">
               <Security />
             </PinGate>
           }
@@ -31,7 +33,7 @@ export default function App() {
         <Route
           path="/financeiro"
           element={
-            <PinGate setor="financeiro" nome="Financeiro">
+            <PinGate key="financeiro" setor="financeiro" nome="Financeiro">
               <Finance />
             </PinGate>
           }
@@ -39,7 +41,7 @@ export default function App() {
         <Route
           path="/gente-e-gestao"
           element={
-            <PinGate setor="gente-e-gestao" nome="Gente e Gestão">
+            <PinGate key="gente-e-gestao" setor="gente-e-gestao" nome="Gente e Gestão">
               <People />
             </PinGate>
           }
@@ -47,13 +49,20 @@ export default function App() {
         <Route
           path="/gestao-comercial"
           element={
-            <PinGate setor="gestao-comercial" nome="Gestão Comercial">
+            <PinGate key="gestao-comercial" setor="gestao-comercial" nome="Gestão Comercial">
               <CommercialManagement />
             </PinGate>
           }
         />
         <Route path="/dashboard/:id" element={<DashboardView />} />
-        <Route path="/acervo" element={<Gallery />} />
+        <Route
+          path="/acervo"
+          element={
+            <Suspense fallback={<div className="app-carregando" aria-busy="true" />}>
+              <Gallery />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<Menu />} />
       </Routes>
       <Analytics />

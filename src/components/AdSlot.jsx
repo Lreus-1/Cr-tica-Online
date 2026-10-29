@@ -22,7 +22,15 @@ export default function AdSlot() {
   useEffect(() => {
     if (!configured) return undefined;
 
+    // Tenta por até ~15s. Se o AdSense não carregar (bloqueador de anúncios,
+    // rede da empresa), para de tentar em vez de ficar rodando para sempre.
+    let tentativas = 0;
     const interval = setInterval(() => {
+      tentativas += 1;
+      if (tentativas > 60) {
+        clearInterval(interval);
+        return;
+      }
       if (pushedRef.current) {
         clearInterval(interval);
         return;

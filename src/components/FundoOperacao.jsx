@@ -1,4 +1,4 @@
-import foto from '../assets/operacao.jpg';
+import foto from '../assets/operacao.webp';
 
 /**
  * Foto da operação ao fundo, bem discreta (kit v1.2): camada fixa atrás

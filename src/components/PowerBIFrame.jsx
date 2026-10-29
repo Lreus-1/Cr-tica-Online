@@ -79,7 +79,7 @@ export default function PowerBIFrame({ dashboard, reloadKey, onStatusChange }) {
         title={dashboard.nome}
         src={dashboard.url}
         frameBorder="0"
-        allowFullScreen="true"
+        allowFullScreen
         onLoad={handleLoad}
         className={`powerbi-iframe ${status === 'ready' ? 'is-visible' : ''}`}
         style={status === 'error' ? { visibility: 'hidden' } : undefined}

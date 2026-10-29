@@ -137,6 +137,8 @@ a {
   pointer-events: none;
   background: 68% 72% / cover no-repeat;
   opacity: 0.11; /* kit: entre 0.06 e 0.14 */
+  will-change: opacity;
+  transform: translateZ(0);
   -webkit-mask-image: radial-gradient(ellipse 95% 85% at 72% 74%, #000 18%, transparent 82%);
   mask-image: radial-gradient(ellipse 95% 85% at 72% 74%, #000 18%, transparent 82%);
 }
@@ -194,14 +196,25 @@ a {
   right: max(var(--space-4), var(--safe-right));
 }
 
-/* No cabeçalho do relatório o espaço é curto: o selo aparece a partir de 560px. */
+/* No cabeçalho do relatório o selo fica sempre visível (kit), em versão compacta
+   no celular; a etiqueta "POWER BI" some em telas estreitas para dar espaço. */
 .op-selo--larga {
-  display: none;
+  font-size: 12px;
+  padding: 3px 9px;
+  gap: 6px;
+}
+
+@media (max-width: 559px) {
+  .dashboard-view__badge {
+    display: none;
+  }
 }
 
 @media (min-width: 560px) {
   .op-selo--larga {
-    display: inline-flex;
+    font-size: 14px;
+    padding: 5px 11px;
+    gap: 7px;
   }
 }
 
@@ -346,8 +359,7 @@ a {
   align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-7);
-  opacity: 0;
-  animation: rise-in var(--duration-slow) var(--ease) forwards;
+  animation: rise-in var(--duration-slow) var(--ease) backwards;
 }
 
 .home__mark {
@@ -386,8 +398,7 @@ a {
   letter-spacing: -0.025em;
   line-height: 1.2;
   color: var(--text-1);
-  opacity: 0;
-  animation: rise-in var(--duration-slow) var(--ease) 80ms forwards;
+  animation: rise-in var(--duration-slow) var(--ease) 80ms backwards;
 }
 
 .home__subtitle {
@@ -396,8 +407,7 @@ a {
   line-height: 1.55;
   color: var(--text-2);
   max-width: 40ch;
-  opacity: 0;
-  animation: rise-in var(--duration-slow) var(--ease) 140ms forwards;
+  animation: rise-in var(--duration-slow) var(--ease) 140ms backwards;
 }
 
 @keyframes rise-in {
@@ -499,8 +509,7 @@ a {
   isolation: isolate;
   transition: transform var(--duration-base) var(--ease-spring), border-color var(--duration-fast) var(--ease),
     box-shadow var(--duration-base) var(--ease);
-  opacity: 0;
-  animation: row-in var(--duration-slow) var(--ease-spring) forwards;
+  animation: row-in var(--duration-slow) var(--ease-spring) backwards;
 }
 
 @keyframes row-in {
@@ -880,14 +889,12 @@ a {
   align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-9);
-  opacity: 0;
-  animation: rise-in var(--duration-slow) var(--ease) forwards;
+  animation: rise-in var(--duration-slow) var(--ease) backwards;
 }
 
 .menu__intro {
   margin-bottom: var(--space-7);
-  opacity: 0;
-  animation: rise-in var(--duration-slow) var(--ease) 80ms forwards;
+  animation: rise-in var(--duration-slow) var(--ease) 80ms backwards;
 }
 
 .menu__title {
@@ -924,8 +931,7 @@ a {
   -webkit-tap-highlight-color: transparent;
   transition: transform var(--duration-base) var(--ease-spring), border-color var(--duration-fast) var(--ease),
     box-shadow var(--duration-base) var(--ease);
-  opacity: 0;
-  animation: row-in var(--duration-slow) var(--ease-spring) forwards;
+  animation: row-in var(--duration-slow) var(--ease-spring) backwards;
 }
 
 .menu-option:nth-child(2) {
@@ -1088,9 +1094,32 @@ a {
 
 .pin__error {
   margin: var(--space-2) 0 0;
-  min-height: 1.2em;
-  font-size: 12.5px;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  border-radius: 99px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--danger);
+  opacity: 0;
+}
+
+.pin__error.is-visible {
+  opacity: 1;
+  background: var(--danger-dim);
+  border-color: rgba(226, 104, 92, 0.4);
+  animation: pin-aviso-in 220ms var(--ease) backwards;
+}
+
+@keyframes pin-aviso-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes pin-shake {
@@ -1541,5 +1570,65 @@ a {
 @media (min-width: 1600px) {
   .home {
     max-width: var(--content-width-lg);
+  }
+}
+
+
+/* ==========================================================================
+   Rede de segurança: erro geral do app e carregamento de tela
+   ========================================================================== */
+.app-erro {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-8) var(--page-padding-x);
+  text-align: center;
+}
+
+.app-erro__icone {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: var(--danger-dim);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-1);
+}
+
+.app-erro__titulo {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.app-erro__msg {
+  margin: 0 0 var(--space-2);
+  max-width: 34ch;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.app-carregando {
+  min-height: 100dvh;
+}
+
+/* Celular e telas de toque: efeitos mais leves para a rolagem ficar fluida.
+   O desfoque grande e a mistura de cores dos halos, e o brilho do traço de
+   luz, são os efeitos mais caros de desenhar em aparelhos mais simples. */
+@media (hover: none) and (pointer: coarse) {
+  .home__aurora span {
+    filter: blur(36px);
+    mix-blend-mode: normal;
+  }
+
+  .border-beam__rect {
+    filter: none;
   }
 }

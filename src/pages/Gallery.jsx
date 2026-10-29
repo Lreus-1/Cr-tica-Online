@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useBack } from '../lib/useBack.js';
 import { ArrowLeft, Download } from 'lucide-react';
 import { galleryTitleOverrides } from '../config/gallery.js';
 import OperacaoSelo from '../components/OperacaoSelo.jsx';
@@ -13,6 +13,16 @@ const modules = import.meta.glob('/src/assets/artes/*.{png,jpg,jpeg,webp,gif}', 
   import: 'default',
 });
 
+// Miniaturas leves (webp, 520px) geradas no build pelo vite-imagetools.
+// Sem isso, cada card baixaria a arte original inteira (2 a 3 MB), o que
+// deixa a galeria pesada no 4G. O botão de baixar continua entregando o
+// arquivo original, em qualidade total.
+const miniaturas = import.meta.glob('/src/assets/artes/*.{png,jpg,jpeg,webp,gif}', {
+  eager: true,
+  import: 'default',
+  query: { w: 520, format: 'webp', quality: 72 },
+});
+
 function toTitleCase(name) {
   return name.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
@@ -23,7 +33,7 @@ const galleryItems = Object.entries(modules)
     const base = filename.replace(/\.[^.]+$/, '');
     const ext = filename.split('.').pop();
     const titulo = galleryTitleOverrides[base] || toTitleCase(base);
-    return { id: base, titulo, url, downloadName: `${titulo}.${ext}` };
+    return { id: base, titulo, url, thumb: miniaturas[path] || url, downloadName: `${titulo}.${ext}` };
   })
   .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'));
 
@@ -34,9 +44,10 @@ function GalleryItem({ item }) {
     <div className="gallery-item">
       <div className="gallery-item__thumb">
         <img
-          src={item.url}
+          src={item.thumb}
           alt={item.titulo}
           loading="lazy"
+          decoding="async"
           onLoad={(e) => setDims(`${e.target.naturalWidth} × ${e.target.naturalHeight}`)}
         />
       </div>
@@ -59,12 +70,12 @@ function GalleryItem({ item }) {
 }
 
 export default function Gallery() {
-  const navigate = useNavigate();
+  const voltar = useBack('/comercial');
 
   return (
     <div className="gallery">
       <header className="gallery__header">
-        <button className="dv-btn" onClick={() => navigate(-1)} aria-label="Voltar" type="button">
+        <button className="dv-btn" onClick={voltar} aria-label="Voltar" type="button">
           <ArrowLeft size={17} strokeWidth={2} />
         </button>
         <div className="gallery__title-group">

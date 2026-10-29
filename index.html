@@ -24,7 +24,14 @@
          via mistura de famílias); JetBrains Mono reservado para a tag técnica -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+    <!-- A fonte carrega sem bloquear a tela: se o Google Fonts estiver lento ou
+         bloqueado na rede, o portal aparece do mesmo jeito (com a fonte do sistema). -->
+    <link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" />
+    <noscript>
+      <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" />
+    </noscript>
 
     <!-- Preconnect com o Power BI: abre a conexão (DNS + TLS) assim que o
          app inicia, antes mesmo de a pessoa tocar num card — economiza
@@ -38,9 +45,80 @@
          AdSlot na Home. -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5226466925670263"
      crossorigin="anonymous"></script>
+
+    <!-- Fundo escuro desde o primeiro instante (nunca tela branca) e tela de
+         abertura que fica visível até o app carregar. -->
+    <style>
+      html, body { margin: 0; background: #060a12; color: #f3f6fb; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      .boot { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+      .boot svg { width: 34px; height: auto; animation: boot-pulse 1.2s ease-in-out infinite alternate; }
+      .boot p { margin: 0; font-size: 13px; color: #7a8aa2; }
+      .boot button { display: none; padding: 9px 18px; border-radius: 8px; border: 1px solid rgba(148,180,214,.26); background: #131c2c; color: #f3f6fb; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+      .boot.is-lento button { display: inline-block; }
+      @keyframes boot-pulse { from { opacity: .45; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .boot svg { animation: none; } }
+    </style>
+
+    <!-- Recuperação automática. Depois de uma atualização do portal, um arquivo
+         antigo pode não existir mais. Se um arquivo DO PRÓPRIO SITE falhar ao
+         carregar, limpamos o cache do app e recarregamos uma vez (sem entrar em
+         loop). Falhas de sites externos (anúncios, bloqueadores) são ignoradas. -->
+    <script>
+      (function () {
+        var CHAVE = 'luvi:recuperou';
+        function mostrarBotao() {
+          var b = document.querySelector('.boot');
+          if (b) b.className = 'boot is-lento';
+        }
+        function recuperar() {
+          try {
+            var antes = Number(sessionStorage.getItem(CHAVE)) || 0;
+            if (Date.now() - antes < 20000) { mostrarBotao(); return; }
+            sessionStorage.setItem(CHAVE, String(Date.now()));
+          } catch (e) {}
+          var tarefas = [];
+          if ('serviceWorker' in navigator) {
+            tarefas.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+              return Promise.all(rs.map(function (r) { return r.unregister(); }));
+            }));
+          }
+          if (window.caches) {
+            tarefas.push(caches.keys().then(function (ks) {
+              return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+            }));
+          }
+          Promise.all(tarefas).catch(function () {}).then(function () { location.reload(); });
+        }
+        window.__luviRecuperar = recuperar;
+        window.addEventListener('error', function (e) {
+          var t = e.target;
+          if (t && t !== window && (t.tagName === 'SCRIPT' || t.tagName === 'LINK')) {
+            var url = t.src || t.href || '';
+            if (url.indexOf(location.origin) === 0) recuperar();
+          }
+        }, true);
+        // Se em 7s o app ainda não apareceu, oferece o botão de recarregar.
+        setTimeout(mostrarBotao, 7000);
+      })();
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot" role="status" aria-live="polite">
+        <svg viewBox="0 0 245 310" aria-hidden="true">
+          <rect x="5" y="120" width="55" height="150" fill="#fff"/>
+          <rect x="90" y="70" width="55" height="200" fill="#fff"/>
+          <rect x="175" y="35" width="55" height="235" fill="#fff"/>
+          <path d="M30,100 L115,50 L200,15" stroke="#F0C811" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <circle cx="30" cy="100" r="16" fill="#F0C811"/>
+          <circle cx="115" cy="50" r="16" fill="#F0C811"/>
+          <circle cx="200" cy="15" r="16" fill="#F0C811"/>
+        </svg>
+        <p>Abrindo o portal...</p>
+        <button type="button" onclick="location.reload()">Recarregar</button>
+      </div>
+    </div>
+    <noscript>Este portal precisa de JavaScript para funcionar.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

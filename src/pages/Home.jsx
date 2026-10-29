@@ -1,4 +1,4 @@
-import { Instagram, Images, Target, ChevronRight } from 'lucide-react';
+import { Instagram, Images, Target, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { dashboards } from '../config/dashboards.js';
 import DashboardCard from '../components/DashboardCard.jsx';
@@ -18,6 +18,9 @@ export default function Home() {
 
       <header className="home__header">
         <div className="home__brand">
+          <Link to="/" className="dv-btn" aria-label="Voltar ao menu">
+            <ArrowLeft size={17} strokeWidth={2} />
+          </Link>
           <span className="home__mark">
             <LuviMark size={22} />
           </span>

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { ArrowLeft, RotateCw, Maximize2, Minimize2, ExternalLink } from 'lucide-react';
 import { getDashboardById } from '../config/dashboards.js';
 import { getDeliveryDashboardById } from '../config/deliveryDashboards.js';
@@ -10,6 +10,7 @@ import PowerBIFrame from '../components/PowerBIFrame.jsx';
 import PinGate from '../components/PinGate.jsx';
 import OperacaoSelo from '../components/OperacaoSelo.jsx';
 import { useFullscreen } from '../hooks/useFullscreen.js';
+import { useBack } from '../lib/useBack.js';
 
 // Detecta Safari em iOS, onde a Fullscreen API não é suportada para
 // elementos arbitrários (apenas <video>). Nesses casos usamos um
@@ -23,7 +24,19 @@ function isIOS() {
 
 function DashboardContent() {
   const { id } = useParams();
-  const navigate = useNavigate();
+  // Se a página foi aberta direto pelo endereço, o "voltar" leva ao setor
+  // do painel (em vez de ficar sem ação).
+  const voltar = useBack(
+    getDeliveryDashboardById(id)
+      ? '/entrega'
+      : getSecurityDashboardById(id)
+        ? '/seguranca'
+        : getPeopleDashboardById(id)
+          ? '/gente-e-gestao'
+          : getGestaoComercialDashboardById(id)
+            ? '/gestao-comercial'
+            : '/comercial'
+  );
   // Um painel pode vir da lista do Comercial, da Entrega ou da
   // Segurança — procura nas três, já que essa rota é compartilhada.
   const dashboard =
@@ -62,7 +75,7 @@ function DashboardContent() {
         <header className="dashboard-view__header">
           <button
             className="dv-btn"
-            onClick={() => navigate(-1)}
+            onClick={voltar}
             aria-label="Voltar"
             type="button"
           >
