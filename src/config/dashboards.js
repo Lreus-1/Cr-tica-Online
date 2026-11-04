@@ -31,7 +31,7 @@ export const dashboards = [
     nome: 'Remuneração',
     descricao: 'Indicadores de remuneração e folha',
     icone: 'Wallet',
-    url: 'https://app.powerbi.com/view?r=eyJrIjoiNTJjNTdhMTItMTAxZi00NDYwLWFjZDQtNDhmNGQyYjk2YTY4IiwidCI6IjBiY2M1NWZiLWE3ZDktNDkxNi1iZjAyLWY2YzE0NDljOTg1MiJ9',
+    url: 'https://remun.luvibi.com.br/',
   },
 
   {
