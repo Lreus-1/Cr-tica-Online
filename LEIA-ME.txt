@@ -1,4 +1,4 @@
-KIT VISUAL APLICADO NO HUB
+KIT VISUAL NO HUB (versao completa, substitui o zip anterior)
 
 Como aplicar:
 1. Extraia este zip POR CIMA da pasta do Hub de Paineis, aceitando substituir.

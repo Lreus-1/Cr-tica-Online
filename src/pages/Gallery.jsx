@@ -17,6 +17,13 @@ const modules = import.meta.glob('/src/assets/artes/*.{png,jpg,jpeg,webp,gif}', 
 // Sem isso, cada card baixaria a arte original inteira (2 a 3 MB), o que
 // deixa a galeria pesada no 4G. O botão de baixar continua entregando o
 // arquivo original, em qualidade total.
+// Tamanho real (largura x altura) de cada arte original, lido no build.
+const medidas = import.meta.glob('/src/assets/artes/*.{png,jpg,jpeg,webp,gif}', {
+  eager: true,
+  import: 'default',
+  query: { as: 'metadata' },
+});
+
 const miniaturas = import.meta.glob('/src/assets/artes/*.{png,jpg,jpeg,webp,gif}', {
   eager: true,
   import: 'default',
@@ -33,7 +40,8 @@ const galleryItems = Object.entries(modules)
     const base = filename.replace(/\.[^.]+$/, '');
     const ext = filename.split('.').pop();
     const titulo = galleryTitleOverrides[base] || toTitleCase(base);
-    return { id: base, titulo, url, thumb: miniaturas[path] || url, downloadName: `${titulo}.${ext}` };
+    return { id: base, titulo, url, thumb: miniaturas[path] || url,
+      tamanho: medidas[path] && medidas[path].width ? `${medidas[path].width} × ${medidas[path].height}` : null, downloadName: `${titulo}.${ext}` };
   })
   .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'));
 
@@ -48,13 +56,15 @@ function GalleryItem({ item }) {
           alt={item.titulo}
           loading="lazy"
           decoding="async"
-          onLoad={(e) => setDims(`${e.target.naturalWidth} × ${e.target.naturalHeight}`)}
+          onLoad={(e) => {
+            if (!item.tamanho) setDims(`${e.target.naturalWidth} × ${e.target.naturalHeight}`);
+          }}
         />
       </div>
       <div className="gallery-item__info">
         <div className="gallery-item__text">
           <p className="gallery-item__name">{item.titulo}</p>
-          <p className="gallery-item__format">{dims || '—'}</p>
+          <p className="gallery-item__format">{item.tamanho || dims || '—'}</p>
         </div>
         <a
           href={item.url}

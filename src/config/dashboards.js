@@ -51,7 +51,7 @@ export const dashboards = [
     icone: 'ListChecks',
     // Ferramenta própria (fora do Power BI): abre em nova aba.
     externo: true,
-    url: 'task-nuernberg.luvibi.com.br',
+    url: 'https://task-nuernberg.luvibi.com.br',
   },
 
   {

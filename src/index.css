@@ -133,7 +133,7 @@ a {
 .op-fundo {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0; /* kit: camada 0, atrás do conteúdo (que fica na camada 1) */
   pointer-events: none;
   background: 68% 72% / cover no-repeat;
   opacity: 0.11; /* kit: entre 0.06 e 0.14 */
@@ -289,6 +289,7 @@ a {
   width: 100%;
   position: relative;
   isolation: isolate;
+  z-index: 1;
   overflow-x: hidden;
 }
 
@@ -740,6 +741,8 @@ a {
    Acervo de artes (galeria)
    ========================================================================== */
 .gallery {
+  position: relative;
+  z-index: 1;
   min-height: 100dvh;
   max-width: var(--content-width-lg);
   margin: 0 auto;
@@ -756,8 +759,10 @@ a {
 
 .gallery__title-group {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
 }
 
 .gallery__title {
@@ -882,6 +887,7 @@ a {
     calc(var(--safe-bottom) + var(--space-6)) max(var(--page-padding-x), var(--safe-right));
   position: relative;
   isolation: isolate;
+  z-index: 1;
 }
 
 .menu__header {
@@ -1037,10 +1043,12 @@ a {
     calc(var(--safe-bottom) + var(--space-6)) max(var(--page-padding-x), var(--safe-right));
   position: relative;
   isolation: isolate;
+  z-index: 1;
 }
 
-.pin__back {
+.pin .pin__back {
   position: absolute;
+  z-index: 2;
   top: calc(var(--safe-top) + var(--space-4));
   left: max(var(--space-4), var(--safe-left));
 }
@@ -1155,6 +1163,8 @@ a {
    Dashboard view — a navegação recua para dar protagonismo ao relatório
    ========================================================================== */
 .dashboard-view {
+  position: relative;
+  z-index: 1;
   height: 100dvh;
   display: flex;
   flex-direction: column;
