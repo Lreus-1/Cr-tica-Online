@@ -51,7 +51,7 @@ export const dashboards = [
     icone: 'ListChecks',
     // Ferramenta própria (fora do Power BI): abre em nova aba.
     externo: true,
-    url: 'https://acompanhamento-task.vercel.app/',
+    url: 'task-nuernberg.luvibi.com.br',
   },
 
   {
