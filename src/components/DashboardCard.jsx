@@ -33,7 +33,7 @@ export default function DashboardCard({ dashboard, index }) {
         {...externalLinkProps(dashboard.url)}
         className="dash-row"
         role="listitem"
-        style={{ animationDelay: `${index * 45}ms` }}
+        style={{ animationDelay: `${index * 55}ms` }}
       >
         {content}
       </a>
@@ -45,7 +45,7 @@ export default function DashboardCard({ dashboard, index }) {
       to={`/dashboard/${dashboard.id}`}
       className="dash-row"
       role="listitem"
-      style={{ animationDelay: `${index * 45}ms` }}
+      style={{ animationDelay: `${index * 55}ms` }}
     >
       {content}
     </Link>

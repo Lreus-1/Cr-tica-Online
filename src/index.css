@@ -935,7 +935,23 @@ a {
 }
 
 .menu-option:nth-child(2) {
-  animation-delay: 80ms;
+  animation-delay: 55ms;
+}
+
+.menu-option:nth-child(3) {
+  animation-delay: 110ms;
+}
+
+.menu-option:nth-child(4) {
+  animation-delay: 165ms;
+}
+
+.menu-option:nth-child(5) {
+  animation-delay: 220ms;
+}
+
+.menu-option:nth-child(6) {
+  animation-delay: 275ms;
 }
 
 .menu-option:hover,
@@ -1142,7 +1158,9 @@ a {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: var(--canvas);
+  /* transparente: a foto da operação (kit v1.2) aparece enquanto o relatório
+     carrega. Depois de carregado, o relatório cobre toda a área. */
+  background: transparent;
 }
 
 .dashboard-view.is-fullscreen,
@@ -1151,6 +1169,7 @@ a {
   inset: 0;
   z-index: 50;
   height: 100dvh;
+  background: var(--canvas); /* em tela cheia a foto de fundo não existe */
 }
 
 .dashboard-view__header {
@@ -1334,7 +1353,7 @@ a {
   flex: 1;
   width: 100%;
   overflow: hidden;
-  background: var(--canvas);
+  background: transparent;
 }
 
 .powerbi-iframe {
@@ -1364,7 +1383,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: var(--space-4);
-  background: var(--canvas);
+  background: transparent;
 }
 
 .loader__bar-track {
@@ -1483,7 +1502,7 @@ a {
   gap: var(--space-2);
   padding: var(--space-8);
   text-align: center;
-  background: var(--canvas);
+  background: transparent;
 }
 
 .error-state__icon {
