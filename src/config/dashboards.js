@@ -31,6 +31,8 @@ export const dashboards = [
     nome: 'Remuneração',
     descricao: 'Indicadores de remuneração e folha',
     icone: 'Wallet',
+    // Página própria (não é Power BI): abre direto no endereço novo, em nova aba.
+    externo: true,
     url: 'https://remun.luvibi.com.br/',
   },
 
@@ -51,7 +53,7 @@ export const dashboards = [
     icone: 'ListChecks',
     // Ferramenta própria (fora do Power BI): abre em nova aba.
     externo: true,
-    url: 'https://task-nuernberg.luvibi.com.br',
+    url: 'https://task-nuernberg.luvibi.com.br/',
   },
 
   {

@@ -8,6 +8,7 @@ import Security from './pages/Security.jsx';
 import Finance from './pages/Finance.jsx';
 import People from './pages/People.jsx';
 import CommercialManagement from './pages/CommercialManagement.jsx';
+import ServiceLevel from './pages/ServiceLevel.jsx';
 import PinGate from './components/PinGate.jsx';
 import FundoOperacao from './components/FundoOperacao.jsx';
 import DashboardView from './pages/DashboardView.jsx';
@@ -54,6 +55,7 @@ export default function App() {
             </PinGate>
           }
         />
+        <Route path="/nivel-de-servico" element={<ServiceLevel />} />
         <Route path="/dashboard/:id" element={<DashboardView />} />
         <Route
           path="/acervo"

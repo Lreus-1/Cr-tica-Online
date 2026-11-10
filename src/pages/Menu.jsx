@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Truck, Briefcase, ShieldCheck, Landmark, UsersRound, TrendingUp, ArrowRight } from 'lucide-react';
+import { Truck, Briefcase, ShieldCheck, Landmark, UsersRound, TrendingUp, Gauge, ArrowRight } from 'lucide-react';
 import LuviMark from '../components/LuviMark.jsx';
 import OperacaoSelo from '../components/OperacaoSelo.jsx';
 
@@ -73,6 +73,14 @@ export default function Menu() {
             <TrendingUp size={26} strokeWidth={1.75} />
           </span>
           <span className="menu-option__label">Gestão Comercial</span>
+          <ArrowRight className="menu-option__arrow" size={18} strokeWidth={2} />
+        </Link>
+
+        <Link to="/nivel-de-servico" className="menu-option" style={{ animationDelay: '330ms' }}>
+          <span className="menu-option__icon">
+            <Gauge size={26} strokeWidth={1.75} />
+          </span>
+          <span className="menu-option__label">Nível de Serviço</span>
           <ArrowRight className="menu-option__arrow" size={18} strokeWidth={2} />
         </Link>
       </div>
