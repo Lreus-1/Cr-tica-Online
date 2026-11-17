@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, BarChart3 } from 'lucide-react';
+import { ChevronRight, ArrowUpRight, BarChart3 } from 'lucide-react';
 import { iconMap } from '../lib/icons.js';
 import BorderBeam from './BorderBeam.jsx';
 import { externalLinkProps } from '../lib/externalLink.js';
@@ -21,7 +21,11 @@ export default function DashboardCard({ dashboard, index }) {
         <span className="dash-row__title">{dashboard.nome}</span>
         <span className="dash-row__desc">{dashboard.descricao}</span>
       </span>
-      <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
+      {dashboard.externo ? (
+        <ArrowUpRight className="dash-row__chevron" size={17} strokeWidth={2} aria-label="Abre em nova aba" />
+      ) : (
+        <ChevronRight className="dash-row__chevron" size={17} strokeWidth={2} />
+      )}
     </>
   );
 
@@ -33,7 +37,7 @@ export default function DashboardCard({ dashboard, index }) {
         {...externalLinkProps(dashboard.url)}
         className="dash-row"
         role="listitem"
-        style={{ animationDelay: `${index * 55}ms` }}
+        style={{ '--i': index }}
       >
         {content}
       </a>
@@ -45,7 +49,7 @@ export default function DashboardCard({ dashboard, index }) {
       to={`/dashboard/${dashboard.id}`}
       className="dash-row"
       role="listitem"
-      style={{ animationDelay: `${index * 55}ms` }}
+      style={{ '--i': index }}
     >
       {content}
     </Link>

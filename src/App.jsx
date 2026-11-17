@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Menu from './pages/Menu.jsx';
 import Home from './pages/Home.jsx';
@@ -16,9 +16,12 @@ import DashboardView from './pages/DashboardView.jsx';
 const Gallery = lazy(() => import('./pages/Gallery.jsx'));
 
 export default function App() {
+  const { pathname } = useLocation();
   return (
     <>
       <FundoOperacao />
+      {/* Entrada de tela: a cada rota nova o conteúdo aparece com um fade curto. */}
+      <div className="page" key={pathname}>
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/comercial" element={<Home />} />
@@ -67,6 +70,7 @@ export default function App() {
         />
         <Route path="*" element={<Menu />} />
       </Routes>
+      </div>
       <Analytics />
     </>
   );

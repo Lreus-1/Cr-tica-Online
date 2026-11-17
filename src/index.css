@@ -510,7 +510,7 @@ a {
   isolation: isolate;
   transition: transform var(--duration-base) var(--ease-spring), border-color var(--duration-fast) var(--ease),
     box-shadow var(--duration-base) var(--ease);
-  animation: row-in var(--duration-slow) var(--ease-spring) backwards;
+  animation: row-in var(--duration-slow) var(--ease-spring) calc(var(--i, 0) * 45ms) backwards;
 }
 
 @keyframes row-in {
@@ -593,7 +593,7 @@ a {
 }
 
 .dash-row:hover .dash-row__icon {
-  transform: scale(1.08) rotate(-3deg);
+  transform: scale(1.05);
 }
 
 .dash-row__body {
@@ -928,8 +928,8 @@ a {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-4);
-  min-height: 84px;
+  padding: var(--space-3) var(--space-4);
+  min-height: 72px;
   border-radius: var(--radius-lg);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -937,27 +937,7 @@ a {
   -webkit-tap-highlight-color: transparent;
   transition: transform var(--duration-base) var(--ease-spring), border-color var(--duration-fast) var(--ease),
     box-shadow var(--duration-base) var(--ease);
-  animation: row-in var(--duration-slow) var(--ease-spring) backwards;
-}
-
-.menu-option:nth-child(2) {
-  animation-delay: 55ms;
-}
-
-.menu-option:nth-child(3) {
-  animation-delay: 110ms;
-}
-
-.menu-option:nth-child(4) {
-  animation-delay: 165ms;
-}
-
-.menu-option:nth-child(5) {
-  animation-delay: 220ms;
-}
-
-.menu-option:nth-child(6) {
-  animation-delay: 275ms;
+  animation: row-in var(--duration-slow) var(--ease-spring) calc(var(--i, 0) * 45ms) backwards;
 }
 
 .menu-option:hover,
@@ -1105,17 +1085,6 @@ a {
   transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
 }
 
-.pin__input:focus {
-  outline: none;
-  border-color: var(--brand-gold);
-  box-shadow: 0 0 0 3px var(--brand-gold-soft);
-}
-
-.pin__input.is-error {
-  border-color: var(--danger);
-  animation: pin-shake 360ms var(--ease);
-}
-
 .pin__error {
   margin: var(--space-2) 0 0;
   min-height: 34px;
@@ -1146,18 +1115,6 @@ a {
   }
 }
 
-@keyframes pin-shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-6px);
-  }
-  75% {
-    transform: translateX(6px);
-  }
-}
 
 /* ==========================================================================
    Dashboard view — a navegação recua para dar protagonismo ao relatório
@@ -1659,5 +1616,455 @@ a {
 
   .border-beam__rect {
     filter: none;
+  }
+}
+
+
+/* ==========================================================================
+   Camada v2 — motion tokens (transitions.dev), mobile e acabamento
+   ==========================================================================
+   Tokens de movimento: escala compartilhada do kit transitions.dev. Os nomes
+   de duração levam o prefixo --t- porque --duration-fast/-base/-slow já existem
+   neste arquivo com outros valores (usados nas telas antigas). */
+:root {
+  --t-duration-quick: 150ms;
+  --t-duration-fast: 250ms;
+  --t-duration-slow: 400ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1);
+
+  /* error state shake */
+  --shake-distance: 6px;
+  --shake-overshoot: 4px;
+  --shake-dur-a: 80ms;
+  --shake-dur-b: 60ms;
+  --shake-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* texts reveal */
+  --stagger-dur: 500ms;
+  --stagger-distance: 12px;
+  --stagger-stagger: 40ms;
+  --stagger-blur: 3px;
+
+  /* shimmer text */
+  --shimmer-dur: 2000ms;
+  --shimmer-base: var(--text-3);
+  --shimmer-highlight: var(--text-1);
+
+  --tap: 44px; /* alvo de toque mínimo */
+}
+
+/* ---- Base mobile ---------------------------------------------------------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--safe-top) + var(--space-4));
+}
+
+a,
+button,
+[role='button'],
+input {
+  touch-action: manipulation; /* sem espera de 300ms nem zoom por toque duplo */
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  -webkit-touch-callout: none;
+}
+
+:focus-visible {
+  outline-offset: 3px;
+}
+
+/* ---- Entrada de tela ------------------------------------------------------- */
+.page {
+  animation: page-in var(--t-duration-fast) var(--ease-smooth-out) backwards;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* ---- Texts reveal (título do menu) ------------------------------------------ */
+.t-stagger-line {
+  display: block;
+}
+
+.t-stagger.is-shown .t-stagger-line {
+  animation: t-stagger-in var(--stagger-dur) var(--ease-smooth-out) backwards;
+}
+
+.t-stagger.is-shown .t-stagger-line--2 {
+  animation-delay: var(--stagger-stagger);
+}
+
+@keyframes t-stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--stagger-distance));
+    filter: blur(var(--stagger-blur));
+  }
+}
+
+/* ---- Menu: linhas com contagem de painéis ---------------------------------- */
+.menu-option__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menu-option__label {
+  flex: none;
+  line-height: 1.25;
+}
+
+.menu-option__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  line-height: 1.2;
+  color: var(--text-3);
+}
+
+.menu-option__icon {
+  width: 46px;
+  height: 46px;
+}
+
+/* ---- Cards ---------------------------------------------------------------- */
+.dash-row__title {
+  line-height: 1.3;
+}
+
+.dash-row__desc {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (hover: none) {
+  /* Sem mouse não existe "passar por cima": o hover grudaria depois do toque.
+     No toque, o card responde só enquanto o dedo está nele. */
+  .dash-row:hover,
+  .menu-option:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+  }
+
+  .dash-row:hover .dash-row__icon {
+    transform: none;
+  }
+
+  .dash-row:hover .dash-row__chevron,
+  .menu-option:hover .menu-option__arrow {
+    transform: none;
+    color: var(--text-3);
+  }
+
+  .dash-row:hover::before,
+  .menu-option:hover::before {
+    transform: scaleX(0);
+  }
+
+  .dash-row:active,
+  .menu-option:active {
+    transform: scale(0.98);
+    background: var(--surface-raised);
+    transition-duration: 60ms;
+  }
+
+  .dash-row:active::before,
+  .menu-option:active::before {
+    transform: scaleX(1);
+  }
+
+  .dash-row:active .dash-row__chevron,
+  .menu-option:active .menu-option__arrow {
+    transform: translateX(3px);
+    color: var(--brand-gold);
+  }
+}
+
+/* ---- PIN: pontos, shake e check de sucesso ----------------------------------- */
+.pin__field {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  transition: border-color var(--t-duration-quick) ease-out, box-shadow var(--t-duration-quick) ease-out;
+  will-change: transform;
+}
+
+.pin__field:focus-within {
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 3px var(--brand-gold-soft);
+}
+
+.pin__field.is-error,
+.pin__field.is-error:focus-within {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-dim);
+  transition-duration: 280ms;
+}
+
+.pin__field.is-shaking {
+  animation: pin-field-shake calc(var(--shake-dur-a) * 2 + var(--shake-dur-b) * 2) linear;
+}
+
+/* Cada trecho do tremor tem a sua curva (error state shake, transitions.dev).
+   Percentuais = 80/280, 160/280, 220/280 da duração total. */
+@keyframes pin-field-shake {
+  0% {
+    transform: translateX(0);
+    animation-timing-function: var(--shake-ease);
+  }
+  28.57% {
+    transform: translateX(var(--shake-distance));
+    animation-timing-function: var(--shake-ease);
+  }
+  57.14% {
+    transform: translateX(calc(var(--shake-distance) * -1));
+    animation-timing-function: var(--shake-ease);
+  }
+  78.57% {
+    transform: translateX(var(--shake-overshoot));
+    animation-timing-function: var(--shake-ease);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.pin__dots {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  pointer-events: none;
+}
+
+.pin__dots i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  background: transparent;
+  transition: background-color var(--t-duration-quick) ease-out, border-color var(--t-duration-quick) ease-out,
+    transform var(--t-duration-fast) var(--ease-bounce);
+}
+
+.pin__dots i.is-filled {
+  background: var(--brand-gold);
+  border-color: var(--brand-gold);
+  transform: scale(1.12);
+}
+
+.pin__field.is-error .pin__dots i {
+  border-color: var(--danger);
+}
+
+/* O <input> real cobre a caixa inteira, sem aparecer: tocar em qualquer ponto
+   abre o teclado numérico. 16px ou mais evita o zoom automático do iOS. */
+.pin__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-indent: 0;
+  opacity: 0.01;
+  cursor: text;
+}
+
+.pin__icon {
+  position: relative;
+}
+
+.pin__lock,
+.pin__check {
+  position: absolute;
+  transition: opacity var(--t-duration-fast) ease-in-out, transform var(--t-duration-fast) ease-in-out,
+    filter var(--t-duration-fast) ease-in-out;
+}
+
+.pin__check {
+  opacity: 0;
+  transform: scale(0.8);
+  filter: blur(3px);
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pin__check path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.pin__box.is-ok .pin__lock {
+  opacity: 0;
+  transform: scale(0.8);
+  filter: blur(3px);
+}
+
+.pin__box.is-ok .pin__check {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.pin__box.is-ok .pin__check path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--t-duration-slow) var(--ease-smooth-out) 80ms;
+}
+
+.pin__icon {
+  transition: background-color var(--t-duration-fast) ease-out, color var(--t-duration-fast) ease-out;
+}
+
+.pin__box.is-ok .pin__icon {
+  background: var(--brand-gold);
+  color: #06101c;
+}
+
+.pin__back {
+  z-index: 3;
+}
+
+/* ---- Loader: mensagem com shimmer (shimmer text) ----------------------------- */
+.loader__msg:not(.is-slow) {
+  background: linear-gradient(90deg, var(--shimmer-base) 40%, var(--shimmer-highlight) 50%, var(--shimmer-base) 60%)
+    0 0 / 400% 100% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: t-shimmer var(--shimmer-dur) linear infinite;
+}
+
+@keyframes t-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* ---- Toque: alvos de 44px e telas estreitas ---------------------------------- */
+@media (pointer: coarse) {
+  .dv-btn,
+  .dv-exit-fullscreen {
+    width: var(--tap);
+    height: var(--tap);
+  }
+
+  .dashboard-view__header {
+    padding-top: calc(var(--safe-top) + var(--space-1));
+    padding-bottom: var(--space-1);
+  }
+
+  /* Botões pequenos mantêm o desenho, mas ganham área de toque de 44px. */
+  .home__footer-contact,
+  .gallery-item__download {
+    position: relative;
+  }
+
+  .home__footer-contact::after,
+  .gallery-item__download::after {
+    content: '';
+    position: absolute;
+    inset: -9px;
+  }
+
+  .error-state__btn {
+    min-height: var(--tap);
+    padding-inline: var(--space-5);
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    --page-padding-x: 16px;
+  }
+
+  .menu__title,
+  .home__title {
+    font-size: 24px;
+  }
+
+  .op-selo {
+    font-size: 12.5px;
+    padding: 4px 9px;
+  }
+}
+
+/* Celular deitado: pouca altura, então o cabeçalho encolhe e o relatório ganha espaço. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .menu {
+    justify-content: flex-start;
+  }
+
+  .menu__header {
+    margin-bottom: var(--space-5);
+  }
+
+  .home__brand {
+    margin-bottom: var(--space-4);
+  }
+
+  .pin {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+}
+
+/* O relatório rola sozinho, sem puxar a página inteira por engano. */
+.powerbi-container {
+  overscroll-behavior: contain;
+}
+
+/* ---- Movimento reduzido: nada anda, nada fica escondido ----------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .t-stagger.is-shown .t-stagger-line,
+  .pin__field.is-shaking {
+    animation: none !important;
+  }
+
+  .loader__msg:not(.is-slow) {
+    animation: none !important;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--text-3);
+  }
+
+  .pin__check path {
+    transition: none !important;
   }
 }
